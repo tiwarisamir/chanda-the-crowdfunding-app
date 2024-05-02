@@ -16,15 +16,18 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex justify-center items-center  gap-3">
         <img
           src={`${session?.user?.image}`}
           alt="Profile picture"
-          className="rounded-full w-[10rem]"
+          className="rounded-full w-[7rem]"
         />
-        <div className="text-center">
-          <h4>{session?.user?.name}</h4>
-          <h4>{session?.user?.email}</h4>
+        <div className="">
+          <ul>
+            <li>Name: dkdmk</li>
+            <li>Username: ksksdk</li>
+            <li>Email: dks@gmail.com</li>
+          </ul>
         </div>
       </div>
     </div>
