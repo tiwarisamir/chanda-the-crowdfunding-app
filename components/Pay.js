@@ -1,24 +1,67 @@
+"use client";
+import { initiate } from "@/actions/useractions";
 import React from "react";
 
 const Pay = () => {
+  const handelPay = async () => {
+    // const data = {
+    //   name: "Tero bau",
+    //   amount: 500,
+    //   message: "This is message for payment",
+    // };
+
+    let formData = await initiate();
+
+    const esewaCall = (data) => {
+      var path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
+
+      var form = document.createElement("form");
+      form.setAttribute("method", "POST");
+      form.setAttribute("action", path);
+      for (var key in data) {
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", data[key]);
+        form.appendChild(hiddenField);
+
+        document.body.appendChild(form);
+        form.submit();
+      }
+    };
+    esewaCall(formData);
+    // try {
+    //   const response = await fetch(`/pages/api`, {
+    //     method: "POST",
+    //     headers: {
+    //       "content-type": "application/json",
+    //     },
+    //     body: JSON.stringify(data),
+    //   });
+    //   console.log(response.json);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
   return (
-    <div className="flex  justify-center  my-5 gap-3 ">
+    <div className="flex   justify-center  my-5 gap-3 ">
       <div className=" bg-slate-900 w-1/2 p-5 rounded-xl">
         <h2 className="text-xl font-semibold">Suppoters</h2>
         <ul className="mx-3">
           <li className="my-2 flex gap-3 items-center">
             <div>
-              <div class="relative w-[1rem] h-[1rem] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+              <div className="relative w-[1rem] h-[1rem] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                 <svg
-                  class="absolute w-[1.5rem] h-[1.5rem] text-gray-400 -left-1"
+                  className="absolute w-[1.5rem] h-[1.5rem] text-gray-400 -left-1"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </div>
@@ -30,17 +73,17 @@ const Pay = () => {
           </li>
           <li className="my-2 flex gap-3 items-center">
             <div>
-              <div class="relative w-[1rem] h-[1rem] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+              <div className="relative w-[1rem] h-[1rem] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                 <svg
-                  class="absolute w-[1.5rem] h-[1.5rem] text-gray-400 -left-1"
+                  className="absolute w-[1.5rem] h-[1.5rem] text-gray-400 -left-1"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </div>
@@ -52,17 +95,17 @@ const Pay = () => {
           </li>
           <li className="my-2 flex gap-3 items-center">
             <div>
-              <div class="relative w-[1rem] h-[1rem] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+              <div className="relative w-[1rem] h-[1rem] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                 <svg
-                  class="absolute w-[1.5rem] h-[1.5rem] text-gray-400 -left-1"
+                  className="absolute w-[1.5rem] h-[1.5rem] text-gray-400 -left-1"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   ></path>
                 </svg>
               </div>
@@ -106,6 +149,7 @@ const Pay = () => {
             </button>
           </div>
           <button
+            onClick={handelPay}
             type="button"
             className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-xl px-5 py-2.5 text-center me-2 mb-2 w-"
           >
