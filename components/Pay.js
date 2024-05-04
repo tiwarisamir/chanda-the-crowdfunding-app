@@ -4,12 +4,6 @@ import React from "react";
 
 const Pay = () => {
   const handelPay = async () => {
-    // const data = {
-    //   name: "Tero bau",
-    //   amount: 500,
-    //   message: "This is message for payment",
-    // };
-
     let formData = await initiate();
 
     const esewaCall = (data) => {
@@ -22,26 +16,17 @@ const Pay = () => {
         var hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
         hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("id", key);
         hiddenField.setAttribute("value", data[key]);
         form.appendChild(hiddenField);
 
         document.body.appendChild(form);
         form.submit();
       }
+      // console.log(form);
     };
+
     esewaCall(formData);
-    // try {
-    //   const response = await fetch(`/pages/api`, {
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "application/json",
-    //     },
-    //     body: JSON.stringify(data),
-    //   });
-    //   console.log(response.json);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   };
 
   return (

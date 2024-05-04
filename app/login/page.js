@@ -16,7 +16,12 @@ const Login = () => {
     <div className="text-white py-14 container mx-auto">
       <h1 className="text-5xl font-bold  text-center">Login</h1>
       <div className="flex flex-col items-center gap-2 min-h-screen  p-10">
-        <button className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+        <button
+          className="flex items-center bg-white border border-gray-300 rounded-lg shadow-md max-w-xs px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          onClick={() => {
+            signIn("google");
+          }}
+        >
           <svg
             className="h-6 w-6 mr-2"
             xmlns="http://www.w3.org/2000/svg"

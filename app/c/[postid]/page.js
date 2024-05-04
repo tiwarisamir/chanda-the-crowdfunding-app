@@ -37,7 +37,7 @@ const Profile = ({ params }) => {
             />
           </div>
           <div className="flex flex-col  items-center justify-center">
-            <h1 className="text-xl font-semibold">{params.username} Tiwari</h1>
+            <h1 className="text-xl font-semibold">{params.postid} Tiwari</h1>
             <h3 className="text-center my-2">
               Lorem ipsum dolor sit amet consectetur.
             </h3>
