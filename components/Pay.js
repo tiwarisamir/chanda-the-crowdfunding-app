@@ -1,32 +1,53 @@
 "use client";
-import { initiate } from "@/actions/useractions";
+import initiate from "@/actions/useractions.js";
 import React from "react";
 
 const Pay = () => {
   const handelPay = async () => {
-    let formData = await initiate();
+    const submitData = {
+      amount: 2000,
+      message: "tero bau",
+    };
 
-    const esewaCall = (data) => {
+    const esewaCall = (formData) => {
+      console.log("form ko data in ecewa function: ", formData);
       var path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
 
       var form = document.createElement("form");
       form.setAttribute("method", "POST");
       form.setAttribute("action", path);
-      for (var key in data) {
+
+      for (var key in formData) {
         var hiddenField = document.createElement("input");
         hiddenField.setAttribute("type", "hidden");
         hiddenField.setAttribute("name", key);
-        hiddenField.setAttribute("id", key);
-        hiddenField.setAttribute("value", data[key]);
+        hiddenField.setAttribute("value", formData[key]);
         form.appendChild(hiddenField);
-
-        document.body.appendChild(form);
-        form.submit();
       }
-      // console.log(form);
+
+      document.body.appendChild(form);
+      form.submit();
     };
 
-    esewaCall(formData);
+    try {
+      const res = await fetch("http://localhost:3000/api/handlepay", {
+        method: "POST",
+        body: JSON.stringify(submitData),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        const responseData = await res.json();
+
+        esewaCall(responseData.formData);
+      } else {
+        console.log("Oops! Something is wrong.");
+      }
+    } catch (error) {
+      console.log("error aayo: ", error);
+    }
   };
 
   return (
