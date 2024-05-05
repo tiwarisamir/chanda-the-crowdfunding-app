@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import crypto from "crypto";
-import { error } from "console";
 
 const createSignature = (message) => {
   const secret = "8gBm/:&EnhH.1/q"; //different in production

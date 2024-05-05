@@ -1,10 +1,10 @@
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import EmailProvider from "next-auth/providers/email";
+import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "@/db/connectDB";
 import User from "@/models/User";
-import Payment from "@/models/Payment";
+import bcrypt from "bcrypt";
 
 export const authoptions = NextAuth({
   providers: [
@@ -18,11 +18,32 @@ export const authoptions = NextAuth({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
-    // Passwordless / email sign in
-    // EmailProvider({
-    //   server: process.env.MAIL_SERVER,
-    //   from: "NextAuth.js <no-reply@example.com>",
-    // }),
+    CredentialsProvider({
+      credentials: {
+        email: {},
+        password: {},
+      },
+      async authorize(credentials, req) {
+        await connectDB();
+
+        let user = await User.findOne({ email: credentials.email }).select(
+          "+password"
+        );
+
+        const isMatch = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
+
+        if (isMatch) {
+          return {
+            id: user._id,
+            email: user.email,
+          };
+        }
+        return null;
+      },
+    }),
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
@@ -38,7 +59,6 @@ export const authoptions = NextAuth({
         await newUser.save();
       }
       return true;
-      // }
     },
     async session({ session, user, token }) {
       const dbUser = await User.findOne({ email: session.user.email });
