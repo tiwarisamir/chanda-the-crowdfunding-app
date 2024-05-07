@@ -1,31 +1,40 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Context } from "@/store/store";
 
 const Login = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const email = useRef();
   const password = useRef();
+  const { isAuth, login } = useContext(Context);
+  const router = useRouter();
 
   const handelLogin = (e) => {
     e.preventDefault();
-    signIn("credentials", {
-      email: email.current.value,
-      password: password.current.value,
-      redirect: false,
-    });
+    const loginType = "credentials";
+    login(loginType, email.current.value, password.current.value);
   };
 
-  const router = useRouter();
+  const handlegoogle = () => {
+    const loginType = "google";
+    login(loginType, email.current.value, password.current.value);
+  };
+
+  const handlegithub = () => {
+    const loginType = "github";
+    login(loginType, email.current.value, password.current.value);
+  };
+
   useEffect(() => {
-    if (session && !router.isReady) {
+    if (isAuth) {
       router.push("/");
     }
-  }, [session, router.isReady]);
+  }, [isAuth]);
   return (
-    <div className="min-h[80vh] flex justify-center items-center">
+    <div className="min-h-[80.7vh] flex justify-center items-center">
       <div className="w-full md:w-4/12 px-4 mt-5 mx-auto ">
         <div className="relative glass p-5 flex flex-col min-w-0 break-words w-full  shadow-lg rounded-lg bg-blueGray-200 border-0">
           <div className="rounded-t  px-6 ">
@@ -37,9 +46,7 @@ const Login = () => {
             <div className="flex flex-col items-center  gap-5 w-full  ">
               <button
                 className="flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md px-6 w-full py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                onClick={() => {
-                  signIn("google");
-                }}
+                onClick={handlegoogle}
               >
                 <svg
                   className="h-6 w-6 mr-2"
@@ -94,9 +101,7 @@ const Login = () => {
 
               <button
                 className="flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md w-full px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                onClick={() => {
-                  signIn("github");
-                }}
+                onClick={handlegithub}
               >
                 <svg
                   className="h-6 w-6 mr-2"

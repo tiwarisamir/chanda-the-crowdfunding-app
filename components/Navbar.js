@@ -1,14 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import { Context } from "@/store/store";
 
 const Navbar = () => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   const [showDropdown, setshowDropdown] = useState(false);
-
+  const { isAuth, logout, user } = useContext(Context);
   const handleSignout = async () => {
-    await signOut();
+    logout();
   };
 
   return (
@@ -18,12 +19,12 @@ const Navbar = () => {
       </Link>
 
       <div>
-        {session ? (
+        {isAuth ? (
           <>
             <button
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
-              className="text-white relative flex justify-center items-center "
+              className=" relative flex justify-center items-center "
               type="button"
               onClick={() => {
                 setshowDropdown(!showDropdown);
@@ -34,11 +35,19 @@ const Navbar = () => {
                 }, 300);
               }}
             >
-              <img
-                src={`${session?.user?.image}`}
-                alt="Profile picture"
-                className="rounded-full w-[3rem]"
-              />
+              {isAuth?.user?.image ? (
+                <img
+                  // src={session?.user?.image}
+                  alt="Profile picture"
+                  className=" object-cover  rounded-full w-[3rem]"
+                />
+              ) : (
+                <img
+                  src="/defaultProfile.webp"
+                  alt="Profile picture"
+                  className=" object-cover rounded-full w-[3rem]"
+                />
+              )}
             </button>
             {/* Dropdown menu */}
             <div

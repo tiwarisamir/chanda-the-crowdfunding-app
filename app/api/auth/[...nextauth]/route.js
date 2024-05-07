@@ -45,6 +45,7 @@ export const authoptions = NextAuth({
       },
     }),
   ],
+  secret: "n1TMTVxgEpa4cdbEGuT86FahjLgv",
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       // if (account.provider === "github") {
@@ -62,8 +63,18 @@ export const authoptions = NextAuth({
     },
     async session({ session, user, token }) {
       const dbUser = await User.findOne({ email: session.user.email });
+      session.user.id = dbUser._id;
       session.user.name = dbUser.username;
       return session;
+    },
+    async jwt({ token, account, profile }) {
+      const dbUser = await User.findOne({ email: token.email });
+
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = dbUser._id;
+      }
+      return token;
     },
   },
 });

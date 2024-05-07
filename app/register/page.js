@@ -1,52 +1,37 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Context } from "@/store/store";
 
 const page = () => {
   const { data: session } = useSession();
   const username = useRef();
   const email = useRef();
   const password = useRef();
+  const { isAuth, register } = useContext(Context);
+  const router = useRouter();
 
   const handelRegister = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3000/api/register", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username.current.value,
-        email: email.current.value,
-        password: password.current.value,
-      }),
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    username.current.value = "";
-    email.current.value = "";
-    password.current.value = "";
-
-    if (res.ok) {
-      const resData = await res.json();
-      console.log(resData);
-
-      signIn("credentials", {
-        email: resData.userdetail.email,
-        password: resData.userdetail.password,
-        redirect: false,
-      });
-    }
+    register(
+      username.current.value,
+      email.current.value,
+      password.current.value
+    );
+    // username.current.value = "";
+    // email.current.value = "";
+    // password.current.value = "";
   };
 
-  const router = useRouter();
   useEffect(() => {
-    if (session && !router.isReady) {
+    if (isAuth) {
       router.push("/");
     }
-  }, [session, router.isReady]);
+  }, [isAuth]);
 
   return (
-    <div className="min-h-[80vh]  flex justify-center items-center">
+    <div className="  flex justify-center items-center">
       <div className="w-full md:w-4/12 px-4 mt-5 mx-auto ">
         <div className="relative glass p-5 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
           <div className="flex-auto px-6  py-2">
