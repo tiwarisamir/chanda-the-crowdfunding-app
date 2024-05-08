@@ -6,7 +6,7 @@ const pageSchema = new Schema({
   coverImage: { type: String },
   description: { type: String },
   targetAmount: { type: Number },
-  rsisedAmount: { type: Number, default: 0 },
+  raisedAmount: { type: Number, default: 0 },
   esewaProductCode: { type: String, select: false },
   esewaSecret: { type: String, select: false },
   user: {

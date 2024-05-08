@@ -35,9 +35,9 @@ const Navbar = () => {
                 }, 300);
               }}
             >
-              {isAuth?.user?.image ? (
+              {user?.profilepic ? (
                 <img
-                  // src={session?.user?.image}
+                  src={`${user?.profilepic}`}
                   alt="Profile picture"
                   className=" object-cover  rounded-full w-[3rem]"
                 />

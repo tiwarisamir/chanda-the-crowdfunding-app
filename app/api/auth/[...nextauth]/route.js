@@ -45,26 +45,27 @@ export const authoptions = NextAuth({
       },
     }),
   ],
-  secret: "n1TMTVxgEpa4cdbEGuT86FahjLgv",
+
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       // if (account.provider === "github") {
       await connectDB();
 
-      const currentUser = await User.findOne({ email: user.email });
+      const currentUser = await User.findOne({ email: user?.email });
       if (!currentUser) {
         const newUser = new User({
           email: user.email,
           username: user.email.split("@")[0],
+          profilepic: user?.image,
         });
         await newUser.save();
       }
       return true;
     },
     async session({ session, user, token }) {
-      const dbUser = await User.findOne({ email: session.user.email });
-      session.user.id = dbUser._id;
-      session.user.name = dbUser.username;
+      const dbUser = await User.findOne({ email: session?.user?.email });
+      session.user.id = dbUser?._id;
+      session.user.name = dbUser?.username;
       return session;
     },
     async jwt({ token, account, profile }) {
@@ -72,7 +73,7 @@ export const authoptions = NextAuth({
 
       if (account) {
         token.accessToken = account.access_token;
-        token.id = dbUser._id;
+        token.id = dbUser?._id;
       }
       return token;
     },

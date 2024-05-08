@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 export const Context = createContext({
   isAuth: false,
   user: {},
+  pageDetails: [],
   login: () => {},
   logout: () => {},
   register: () => {},
@@ -16,6 +17,7 @@ const ContextProvider = ({ children }) => {
   const [isAuth, setisAuth] = useState(false);
   const [user, setuser] = useState({});
   const [refresh, setrefresh] = useState(false);
+  const [pageDetails, setpageDetails] = useState([]);
   const { data: session, status } = useSession();
 
   const router = useRouter();
@@ -103,8 +105,11 @@ const ContextProvider = ({ children }) => {
         if (data.success) {
           // console.log("gtProfile ko data :", data.user);
           setuser(data.user);
+          setpageDetails(data.pageDetails);
+          // console.log("yo store ki data ho: ", pageDetails);
+          // console.log("type of page details in store ", typeof data.pageDetail);
+          // console.log("page details", data.pageDetail);
         }
-        // console.log("isAuth ko value in store useEffect: ", isAuth);
       };
 
       fetchProfile();
@@ -121,6 +126,7 @@ const ContextProvider = ({ children }) => {
         register,
         logout,
         user,
+        pageDetails,
       }}
     >
       {children}

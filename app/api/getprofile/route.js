@@ -1,21 +1,21 @@
 import { NextResponse } from "next/server";
-import connectDB from "@/db/connectDB";
 import User from "@/models/User";
-import jwt from "jsonwebtoken";
 import { getServerSession } from "next-auth";
 import { authoptions } from "../auth/[...nextauth]/route";
+import donationPage from "@/models/donationPage";
 
 export async function GET(req, res) {
   try {
-    connectDB();
     const session = await getServerSession(authoptions);
 
-    const currentUser = await User.findOne({ email: session.user.email });
+    const currentUser = await User.findOne({ email: session?.user?.email });
+    const pageDetail = await donationPage.find({ user: currentUser?._id });
 
     if (currentUser) {
       return NextResponse.json({
         success: true,
         user: currentUser,
+        pageDetails: pageDetail,
       });
     }
     return NextResponse.json({

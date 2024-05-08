@@ -10,14 +10,7 @@ const Dashboard = () => {
   const [showDropdown, setshowDropdown] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
-  const { isAuth, user } = useContext(Context);
-  useEffect(() => {
-    setTimeout(() => {
-      if (!isAuth) {
-        router.push("/");
-      }
-    }, 800);
-  }, []);
+  const { isAuth, user, pageDetails } = useContext(Context);
 
   return (
     <div className="flex gap-5  p-3">
@@ -25,7 +18,7 @@ const Dashboard = () => {
         <div className=" overflow-hidden flex justify-center  rounded-full   h-[10rem]">
           {session?.user?.image ? (
             <img
-              // src={session?.user?.image}
+              src={`${user?.profilepic}`}
               alt="Profile picture"
               className=" object-cover"
             />
@@ -39,7 +32,7 @@ const Dashboard = () => {
         </div>
         <div className="text-center ">
           <h3 className="text-xl font-semibold"> {user.username}</h3>
-          <h3 className="text-sm ">Student | MERN stack developer</h3>
+          <h3 className="text-sm ">{user.bio}</h3>
         </div>
 
         <div className="flex justify-around w-full">
@@ -135,26 +128,27 @@ const Dashboard = () => {
             </div>
 
             <div className="w-full h-[22.3rem] flex flex-col gap-2  mt-2 rounded-md  ">
-              <div className="w-full h-[4rem] flex  justify-between items-center border-b px-3 py-2">
-                <span className="text-xl">
-                  This is where the headings comes!!
-                </span>
+              {pageDetails && pageDetails.length > 0 ? (
+                pageDetails.map((item) => {
+                  return (
+                    <div
+                      key={item._id}
+                      className="w-full h-[4rem] flex  justify-between items-center border-b px-3 py-2"
+                    >
+                      <span className="text-xl">{item.title}</span>
 
-                <span className="text-green-500 text-xm">Rs 8000 raised</span>
-                <span className="cursor-pointer text-sm underline underline-offset-2">
-                  <Link href={"/dashboard"}>Dashboard</Link>
-                </span>
-              </div>
-              <div className="w-full h-[4rem] flex  justify-between items-center border-b px-3 py-2">
-                <span className="text-xl">
-                  This is where the headings comes!!
-                </span>
-
-                <span className="text-green-500 text-xm">Rs 8000 raised</span>
-                <span className="cursor-pointer text-sm underline underline-offset-2">
-                  <Link href={"/dashboard"}>Dashboard</Link>
-                </span>
-              </div>
+                      <span className="text-green-500 text-xm">
+                        Rs {item.raisedAmount} raised
+                      </span>
+                      <span className="cursor-pointer text-sm underline underline-offset-2">
+                        <Link href={"/dashboard"}>Dashboard</Link>
+                      </span>
+                    </div>
+                  );
+                })
+              ) : (
+                <p>No pages available.</p>
+              )}
             </div>
           </div>
 

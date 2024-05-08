@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
+import toast from "react-hot-toast";
 
 const Creator = () => {
   const { data: session, status } = useSession();
@@ -36,6 +37,11 @@ const Creator = () => {
         "content-type": "application/json",
       },
     });
+
+    const data = await res.json();
+    if (data.success) {
+      toast.success(data.message);
+    }
   };
   return (
     <div className="  flex justify-center items-center">

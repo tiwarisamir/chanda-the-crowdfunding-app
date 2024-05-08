@@ -14,10 +14,29 @@ const Profile = ({ params }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!session && status !== "loading") {
-      router.push("/");
+    try {
+      const fetchProfile = async () => {
+        const res = await fetch(`http://localhost:3000/api/getpage/${params}`, {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        });
+        // const data = await res.json();
+        // console.log("params in postid: ", params);
+      };
+
+      fetchProfile();
+    } catch (err) {
+      console.log("Error :", err);
     }
-  }, [session, status, router]);
+  }, []);
+
+  // useEffect(() => {
+  //   if (!session && status !== "loading") {
+  //     router.push("/");
+  //   }
+  // }, [session, status, router]);
 
   return (
     <div>
@@ -37,7 +56,7 @@ const Profile = ({ params }) => {
             />
           </div>
           <div className="flex flex-col  items-center justify-center">
-            <h1 className="text-xl font-semibold">{params.postid} Tiwari</h1>
+            <h1 className="text-xl font-semibold"> Tiwari</h1>
             <h3 className="text-center my-2">
               Lorem ipsum dolor sit amet consectetur.
             </h3>
