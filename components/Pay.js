@@ -1,13 +1,24 @@
 "use client";
-import initiate from "@/actions/useractions.js";
-import React from "react";
+import { Context } from "@/store/store";
+import React, { useContext, useRef, useState } from "react";
 
-const Pay = () => {
-  const handelPay = async () => {
-    const submitData = {
-      amount: 2000,
-      message: "tero bau",
-    };
+const Pay = (pageDetails) => {
+  const { isAuth, logout, user } = useContext(Context);
+  const amount = useRef();
+  const message = useRef();
+
+  const [payData, setpayData] = useState({
+    amount: amount.current?.value,
+    message: message.current?.value,
+    payment_method: "esewa",
+    esewaSecret: "8gBm/:&EnhH.1/q",
+    esewaProductCode: "EPAYTEST",
+    name: user.username,
+    to_page: pageDetails._id,
+  });
+
+  const handelPay = async (e) => {
+    e.preventDefault();
 
     const esewaCall = (formData) => {
       console.log("form ko data in ecewa function: ", formData);
@@ -29,25 +40,27 @@ const Pay = () => {
       form.submit();
     };
 
-    try {
-      const res = await fetch("http://localhost:3000/api/handlepay", {
-        method: "POST",
-        body: JSON.stringify(submitData),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
+    console.log("yo form ko data ho : ", payData);
 
-      if (res.ok) {
-        const responseData = await res.json();
+    // try {
+    //   const res = await fetch("http://localhost:3000/api/handlepay", {
+    //     method: "POST",
+    //     body: JSON.stringify(payData),
+    //     headers: {
+    //       "content-type": "application/json",
+    //     },
+    //   });
 
-        esewaCall(responseData.formData);
-      } else {
-        console.log("Oops! Something is wrong.");
-      }
-    } catch (error) {
-      console.log("error aayo: ", error);
-    }
+    //   if (res.ok) {
+    //     const responseData = await res.json();
+
+    //     esewaCall(responseData.formData);
+    //   } else {
+    //     console.log("Oops! Something is wrong.");
+    //   }
+    // } catch (error) {
+    //   console.log("error aayo: ", error);
+    // }
   };
 
   return (
@@ -125,28 +138,27 @@ const Pay = () => {
       </div>
       <div className=" bg-slate-900 w-1/2 p-5 rounded-xl">
         <h2 className="text-xl font-semibold ">Make a Payment</h2>
-        <div className="flex flex-col gap-5 my-3">
+        <form className="flex flex-col gap-5 my-3">
           <input
-            type="text"
-            className="w-full p-3 rounded-lg bg-slate-800 "
-            placeholder="Enter Name"
-          />
-          <input
+            ref={message}
+            name="message"
             type="text"
             className="w-full p-3 rounded-lg bg-slate-800 "
             placeholder="Enter Message"
           />
           <input
-            type="text"
+            ref={message}
+            name="amount"
+            type="number"
             className="w-full p-3 rounded-lg bg-slate-800 "
             placeholder="Enter Amount"
           />
 
           <div className="flex my-3 items-center gap-5">
-            <button className=" focus:border-2 focus:border-slate-100 cursor-pointer w-20 h-20 p-2 rounded-lg bg-slate-800">
+            <button className=" border-2 border-slate-100 cursor-pointer w-20 h-20 p-2 rounded-lg bg-slate-800">
               <img src="/esewa.png" alt="esewa" />
             </button>
-            <button className=" focus:border-2 focus:border-slate-100 cursor-pointer w-20 h-20 p-2 rounded-lg bg-slate-800">
+            <button className="hidden focus:border-2 focus:border-slate-100  cursor-pointer w-20 h-20 p-2 rounded-lg bg-slate-800">
               <img
                 src="https://cdn.nayathegana.com/cloudfront-cdn/jamara/web19/images/khalti-logo.svg"
                 alt="khalti"
@@ -156,12 +168,12 @@ const Pay = () => {
           </div>
           <button
             onClick={handelPay}
-            type="button"
+            type="submit"
             className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-xl px-5 py-2.5 text-center me-2 mb-2 w-"
           >
             Pay
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

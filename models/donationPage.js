@@ -7,8 +7,8 @@ const pageSchema = new Schema({
   description: { type: String },
   targetAmount: { type: Number },
   raisedAmount: { type: Number, default: 0 },
-  esewaProductCode: { type: String, select: false },
-  esewaSecret: { type: String, select: false },
+  esewaProductCode: { type: String },
+  esewaSecret: { type: String },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

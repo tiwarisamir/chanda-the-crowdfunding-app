@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import crypto from "crypto";
 
-const createSignature = (message) => {
+export const createSignature = (message) => {
   const secret = "8gBm/:&EnhH.1/q"; //different in production
   // Create an HMAC-SHA256 hash
   const hmac = crypto.createHmac("sha256", secret);
@@ -16,13 +16,13 @@ const createSignature = (message) => {
 export async function POST(req, res) {
   const data = await req.json();
 
-  console.log("request yo ho: ", data);
+  // console.log("request yo ho: ", data);
 
   // return NextResponse.json(data);
 
   const order = {
     payment_method: "esewa",
-    amount: 500,
+    amount: 100,
     _id: uuidv4(),
   };
   try {
@@ -38,7 +38,7 @@ export async function POST(req, res) {
         product_code: "EPAYTEST",
         signature: signature,
         signed_field_names: "total_amount,transaction_uuid,product_code",
-        success_url: "http://localhost:3000/c/samir",
+        success_url: "http://localhost:3000/api/success",
         tax_amount: "0",
         total_amount: order.amount,
         transaction_uuid: order._id,

@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import donationPage from "@/models/donationPage";
+import connectDB from "@/db/connectDB";
 
 export async function POST(req, res) {
   try {
+    await connectDB();
     const data = await req.json();
     const newPage = new donationPage({
       title: data.title,

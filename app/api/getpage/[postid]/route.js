@@ -3,27 +3,24 @@ import User from "@/models/User";
 import { getServerSession } from "next-auth";
 // import { authoptions } from "../auth/[...nextauth]/route";
 import donationPage from "@/models/donationPage";
+import connectDB from "@/db/connectDB";
 
 export async function GET(req, res) {
   try {
-    // const {
-    //   query: { postid }, // Extract 'postid' from the request URL
-    //   method,
-    // } = req;
+    await connectDB();
 
-    console.log("yo getpage ho: ", req);
-    // const session = await getServerSession(authoptions);
+    const id = await req.url.split("=")[1];
 
-    // const currentUser = await User.findOne({ email: session?.user?.email });
-    // const pageDetail = await donationPage.find({ user: currentUser?._id });
+    const pageDetail = await donationPage.findOne({ _id: id });
+    const organiser = await User.findOne({ _id: pageDetail.user });
 
-    // if (currentUser) {
-    //   return NextResponse.json({
-    //     success: true,
-    //     user: currentUser,
-    //     pageDetails: pageDetail,
-    //   });
-    // }
+    if (pageDetail) {
+      return NextResponse.json({
+        success: true,
+        organiser: organiser,
+        pageDetails: pageDetail,
+      });
+    }
 
     return NextResponse.json({
       success: false,

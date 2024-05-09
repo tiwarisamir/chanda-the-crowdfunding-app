@@ -1,11 +1,13 @@
+import connectDB from "@/db/connectDB";
 import { NextResponse } from "next/server";
 
 export async function GET(req, res) {
   try {
-    console.log("*******************************************/*");
+    await connectDB();
+    // console.log("*******************************************/*");
     const id = await req.headers["id"];
     // const id = await req.json();
-    console.log("yo req ho :", id);
+    // console.log("yo req ho :", id);
 
     return NextResponse.json({
       success: true,
