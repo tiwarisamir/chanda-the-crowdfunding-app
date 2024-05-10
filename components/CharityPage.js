@@ -1,19 +1,33 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import { FaXTwitter } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookSquare } from "react-icons/fa";
 import Pay from "@/components/Pay";
 import Posts from "@/components/Posts";
+import Link from "next/link";
+import { FaRegEdit } from "react-icons/fa";
+import { Context } from "@/store/store";
 
-const CharityPage = ({ userDetails, pageDetails }) => {
+const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
+  const { user } = useContext(Context);
   return (
     <>
       <div className="w-full flex flex-col items-center  ">
         <div className=" flex gap-5 w-[80%]  my-5">
           <div className="flex flex-col gap-2 w-3/4 items-center justify-center bg-slate-900 p-4 rounded-lg">
-            <h1 className="text-2xl  font-bold w-full ">{pageDetails.title}</h1>
+            <div className="w-full flex  ">
+              <h1 className="text-2xl bg  font-bold w-full ">
+                {pageDetails.title}
+              </h1>
+
+              {user._id === pageDetails.user && (
+                <Link href={`/edit/pages/h/${pageDetails._id}`}>
+                  <FaRegEdit size={20} />
+                </Link>
+              )}
+            </div>
 
             <Image
               src={`${pageDetails.coverImage}`}
@@ -27,7 +41,7 @@ const CharityPage = ({ userDetails, pageDetails }) => {
                 <img
                   src={`${userDetails.profilepic}`}
                   alt="Profile picture"
-                  className=" object-cover  rounded-full w-[3.5rem]"
+                  className=" object-cover  rounded-full w-[3.5rem] h-[3.5rem]"
                 />
               </div>
               <div>
@@ -40,7 +54,7 @@ const CharityPage = ({ userDetails, pageDetails }) => {
           <div className="bg-slate-900 flex flex-col gap-2 rounded-lg p-4 w-2/4 ">
             <h1 className="text-sm">
               <span className="font-bold text-xl ">
-                Rs {pageDetails.raisedAmount}
+                Rs {pageDetails.raisedAmount}{" "}
               </span>
               raised of Rs {pageDetails.targetAmount}
             </h1>
@@ -65,55 +79,27 @@ const CharityPage = ({ userDetails, pageDetails }) => {
 
             <h2 className="text-xl mt-2 font-semibold">Recent donations</h2>
             <div className=" h-full flex flex-col gap-2 pl-2 ">
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
+              {recentDonation && recentDonation.length > 0 ? (
+                recentDonation.map((item) => {
+                  return (
+                    <div key={item._id} className="flex items-center gap-2">
+                      <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 ">
+                        <img
+                          src="/defaultProfile.webp"
+                          alt="Profile picture"
+                          className=" object-cover rounded-full w-[3rem]"
+                        />
+                      </div>
+                      <div>
+                        <h2>{item.name}</h2>
+                        <h4 className="text-xs">Rs {item.amount}</h4>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <p>No donation available.</p>
+              )}
             </div>
           </div>
         </div>
@@ -124,7 +110,7 @@ const CharityPage = ({ userDetails, pageDetails }) => {
         </div>
 
         <div id="donate" className="w-[80%]">
-          <Pay pageDetails={pageDetails} />
+          <Pay pageDetails={pageDetails} recentDonation={recentDonation} />
         </div>
 
         <div className="w-[80%]">

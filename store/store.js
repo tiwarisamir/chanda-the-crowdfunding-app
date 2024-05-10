@@ -8,9 +8,11 @@ export const Context = createContext({
   isAuth: false,
   user: {},
   pageDetails: [],
+  paymentDetails: [],
   login: () => {},
   logout: () => {},
   register: () => {},
+  editProfile: () => {},
 });
 
 const ContextProvider = ({ children }) => {
@@ -18,6 +20,7 @@ const ContextProvider = ({ children }) => {
   const [user, setuser] = useState({});
   const [refresh, setrefresh] = useState(false);
   const [pageDetails, setpageDetails] = useState([]);
+  const [paymentDetails, setpaymentDetails] = useState([]);
   const { data: session, status } = useSession();
 
   const router = useRouter();
@@ -58,6 +61,7 @@ const ContextProvider = ({ children }) => {
           username: username,
           email: email,
           password: password,
+          // bio:bio,
         }),
         headers: {
           "content-type": "application/json",
@@ -92,6 +96,33 @@ const ContextProvider = ({ children }) => {
     }
   };
 
+  const editProfile = async (username, bio, profilepic) => {
+    try {
+      const res = await fetch("http://localhost:3000/api/editprofile", {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          profilepic: profilepic,
+          bio: bio,
+          id: user._id,
+        }),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        const resData = await res.json();
+        console.log(resData);
+        toast.success(resData.message);
+        setrefresh(!refresh);
+      }
+    } catch (err) {
+      toast.error(err.resData.data.message);
+      // console.log("error from response :", err);
+    }
+  };
+
   useEffect(() => {
     try {
       const fetchProfile = async () => {
@@ -103,12 +134,9 @@ const ContextProvider = ({ children }) => {
         });
         const data = await res.json();
         if (data.success) {
-          // console.log("gtProfile ko data :", data.user);
           setuser(data.user);
           setpageDetails(data.pageDetails);
-          // console.log("yo store ki data ho: ", pageDetails);
-          // console.log("type of page details in store ", typeof data.pageDetail);
-          // console.log("page details", data.pageDetail);
+          setpaymentDetails(data.paymentDetails);
         }
       };
 
@@ -127,6 +155,8 @@ const ContextProvider = ({ children }) => {
         logout,
         user,
         pageDetails,
+        paymentDetails,
+        editProfile,
       }}
     >
       {children}

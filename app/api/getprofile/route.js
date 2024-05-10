@@ -3,6 +3,7 @@ import User from "@/models/User";
 import { getServerSession } from "next-auth";
 import { authoptions } from "../auth/[...nextauth]/route";
 import donationPage from "@/models/donationPage";
+import Payment from "@/models/Payment";
 
 export async function GET(req, res) {
   try {
@@ -10,12 +11,14 @@ export async function GET(req, res) {
 
     const currentUser = await User.findOne({ email: session?.user?.email });
     const pageDetail = await donationPage.find({ user: currentUser?._id });
+    const paymentDetails = await Payment.find({ from_user: currentUser?._id });
 
     if (currentUser) {
       return NextResponse.json({
         success: true,
         user: currentUser,
         pageDetails: pageDetail,
+        paymentDetails: paymentDetails,
       });
     }
     return NextResponse.json({

@@ -1,12 +1,16 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import { FaXTwitter } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookSquare } from "react-icons/fa";
 import Pay from "@/components/Pay";
 import Posts from "@/components/Posts";
+import { FaRegEdit } from "react-icons/fa";
+import { Context } from "@/store/store";
+import Link from "next/link";
 
-const CreatorPage = ({ userDetails, pageDetails }) => {
+const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
+  const { user } = useContext(Context);
   return (
     <>
       <div>
@@ -57,8 +61,18 @@ const CreatorPage = ({ userDetails, pageDetails }) => {
 
         <div className="flex flex-col justify-center items-center  mt-[14rem]">
           <div className="w-[80%] my-10 ">
-            <h1 className="ml-5 text-2xl font-bold ">{pageDetails.title}</h1>
-            <Pay pageDetails={pageDetails} />
+            <div className="flex items-center ">
+              <h1 className="ml-5 text-2xl w-full font-bold ">
+                {pageDetails.title}
+              </h1>
+              {user._id === pageDetails.user && (
+                <Link href={`/edit/pages/c/${pageDetails._id}`}>
+                  <FaRegEdit size={20} />
+                </Link>
+              )}
+            </div>
+
+            <Pay pageDetails={pageDetails} recentDonation={recentDonation} />
           </div>
         </div>
         <div>

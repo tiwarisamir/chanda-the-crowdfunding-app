@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 // import { authoptions } from "../auth/[...nextauth]/route";
 import donationPage from "@/models/donationPage";
 import connectDB from "@/db/connectDB";
+import Payment from "@/models/Payment";
 
 export async function GET(req, res) {
   try {
@@ -13,12 +14,14 @@ export async function GET(req, res) {
 
     const pageDetail = await donationPage.findOne({ _id: id });
     const organiser = await User.findOne({ _id: pageDetail.user });
+    const pay = await Payment.find({ to_page: id });
 
     if (pageDetail) {
       return NextResponse.json({
         success: true,
         organiser: organiser,
         pageDetails: pageDetail,
+        recentDonation: pay,
       });
     }
 

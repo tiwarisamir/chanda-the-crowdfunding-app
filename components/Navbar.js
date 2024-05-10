@@ -39,7 +39,7 @@ const Navbar = () => {
                 <img
                   src={`${user?.profilepic}`}
                   alt="Profile picture"
-                  className=" object-cover  rounded-full w-[3rem]"
+                  className=" object-cover  rounded-full w-[3rem] h-[3rem]"
                 />
               ) : (
                 <img

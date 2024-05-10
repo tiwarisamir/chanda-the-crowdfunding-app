@@ -10,12 +10,16 @@ import Pay from "@/components/Pay";
 import Posts from "@/components/Posts";
 import CreatorPage from "@/components/CreatorPage";
 import CharityPage from "@/components/CharityPage";
+import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
 
 const Profile = ({ params }) => {
   const { data: session, status } = useSession();
   const [pageDetails, setPageDetails] = useState(null);
   const [userDetails, setuserDetails] = useState(null);
+  const [recentDonation, setrecentDonation] = useState([]);
   const [isLoading, setisLoading] = useState(true);
+
   const [userId, setuserId] = useState("");
 
   const router = useRouter();
@@ -32,6 +36,8 @@ const Profile = ({ params }) => {
         data = await response.json();
         setPageDetails(data.pageDetails);
         setuserDetails(data.organiser);
+        setrecentDonation(data.recentDonation);
+
         // console.log("response in postid: ", data);
         setisLoading(false);
       };
@@ -55,13 +61,21 @@ const Profile = ({ params }) => {
   }
 
   return (
-    <>
+    <div className="relative">
       {pageDetails?.pageType === "CREATOR" ? (
-        <CreatorPage userDetails={userDetails} pageDetails={pageDetails} />
+        <CreatorPage
+          userDetails={userDetails}
+          pageDetails={pageDetails}
+          recentDonation={recentDonation}
+        />
       ) : (
-        <CharityPage userDetails={userDetails} pageDetails={pageDetails} />
+        <CharityPage
+          userDetails={userDetails}
+          pageDetails={pageDetails}
+          recentDonation={recentDonation}
+        />
       )}
-    </>
+    </div>
   );
 };
 

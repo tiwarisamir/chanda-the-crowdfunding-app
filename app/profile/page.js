@@ -3,30 +3,38 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
-import { FaEdit } from "react-icons/fa";
+import { FaRegShareFromSquare } from "react-icons/fa6";
 import { Context } from "../../store/store";
 
 const Dashboard = () => {
   const [showDropdown, setshowDropdown] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
-  const { isAuth, user, pageDetails } = useContext(Context);
+  const { isAuth, user, pageDetails, paymentDetails } = useContext(Context);
+  const donated = paymentDetails.reduce(
+    (total, item) => total + item.amount,
+    0
+  );
+  const raised = pageDetails.reduce(
+    (total, item) => total + item.raisedAmount,
+    0
+  );
 
   return (
-    <div className="flex gap-5  p-3">
+    <div className="flex gap-5 items-center  p-3">
       <div className="w-1/4 flex flex-col gap-4  p-5 items-center overflow-hidden  glass">
-        <div className=" overflow-hidden flex justify-center  rounded-full   h-[10rem]">
+        <div className=" overflow-hidden flex justify-center  rounded-full  ">
           {session?.user?.image ? (
             <img
               src={`${user?.profilepic}`}
               alt="Profile picture"
-              className=" object-cover"
+              className=" w-36 h-36 object-cover"
             />
           ) : (
             <img
               src="/defaultProfile.webp"
               alt="Profile picture"
-              className=" object-cover"
+              className="w-36 h-36  object-cover"
             />
           )}
         </div>
@@ -37,175 +45,125 @@ const Dashboard = () => {
 
         <div className="flex justify-around w-full">
           <div className="text-center">
-            <h3>1</h3>
+            <h3>{pageDetails.length}</h3>
             <h3>Page</h3>
           </div>
           <div className="text-center">
-            <h3>250590</h3>
+            <h3>{raised}</h3>
             <h3>Raised</h3>
           </div>
           <div className="text-center">
-            <h3>130400</h3>
+            <h3>{donated}</h3>
             <h3>Donated</h3>
           </div>
         </div>
 
-        <div>
+        <div className="w-full">
           <h1>Your Donation</h1>
           <ul className="text-xs flex flex-col h-[5.4rem] overflow-y-auto gap-1 ">
-            <li>
-              Yo donated <span className="font-semibold">Rs 500</span> with
-              message "Good job"
-            </li>
-
-            <li>
-              Yo donated <span className="font-semibold">Rs 500</span> with
-              message "Good job"
-            </li>
-            <li>
-              Yo donated <span className="font-semibold">Rs 500</span> with
-              message "Good job"
-            </li>
-            <li>
-              Yo donated <span className="font-semibold">Rs 500</span> with
-              message "Good job"
-            </li>
+            {paymentDetails && pageDetails.length > 0 ? (
+              paymentDetails.map((item) => {
+                return (
+                  <li key={item._id}>
+                    Yo donated{" "}
+                    <span className="font-semibold">Rs {item.amount}</span> via{" "}
+                    {item.payment_method}
+                  </li>
+                );
+              })
+            ) : (
+              <p>No payment to show.</p>
+            )}
           </ul>
         </div>
 
-        <Link href={"/edit"} className="underline text-sm underline-offset-2">
+        <Link
+          href={"/edit/profile"}
+          className="underline text-sm underline-offset-2"
+        >
           Edit Profile
         </Link>
       </div>
       <div className="w-3/4 p-5 flex flex-col  glass">
-        <div className="flex gap-5 mt-3">
-          <div className="w-3/4">
-            <div className="flex justify-between">
-              <h1 className="text-2xl font-semibold">Pages</h1>
-              <div className="relative">
-                <button
-                  className="bg-slate-700 px-3 py-2 rounded-md "
-                  onClick={() => {
-                    setshowDropdown(!showDropdown);
-                  }}
-                  onBlur={() => {
-                    setTimeout(() => {
-                      setshowDropdown(false);
-                    }, 300);
-                  }}
-                >
-                  Create Page
-                </button>
-                <div
-                  id="dropdown"
-                  className={`z-10 ${
-                    !showDropdown && "hidden"
-                  } bg-white divide-y mt-1   absolute divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700`}
-                >
-                  <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownDefaultButton"
+        <div className="flex justify-between">
+          <h1 className="text-2xl font-semibold">Pages</h1>
+          <div className="relative">
+            <button
+              className="bg-slate-700 px-3 py-2 rounded-md "
+              onClick={() => {
+                setshowDropdown(!showDropdown);
+              }}
+              onBlur={() => {
+                setTimeout(() => {
+                  setshowDropdown(false);
+                }, 300);
+              }}
+            >
+              Create Page
+            </button>
+            <div
+              id="dropdown"
+              className={`z-10 
+                ${!showDropdown && "hidden"}
+                 bg-white divide-y  right-5 top-11  absolute divide-gray-100 rounded-md shadow w-44 dark:bg-gray-700`}
+            >
+              <ul
+                className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                aria-labelledby="dropdownDefaultButton"
+              >
+                <li>
+                  <Link
+                    href={`/creator`}
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                   >
-                    <li>
-                      <Link
-                        href={`/creator`}
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Creator page
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href={"/charity"}
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
-                        Charity Page
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                    Creator page
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={"/charity"}
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                  >
+                    Charity Page
+                  </Link>
+                </li>
+              </ul>
             </div>
+          </div>
+        </div>
 
-            <div className="w-full h-[22.3rem] flex flex-col gap-2  mt-2 rounded-md  ">
-              {pageDetails && pageDetails.length > 0 ? (
-                pageDetails.map((item) => {
-                  return (
-                    <div
-                      key={item._id}
-                      className="w-full h-[4rem] flex  justify-between items-center border-b px-3 py-2"
-                    >
-                      <span className="text-xl">{item.title}</span>
-
-                      <span className="text-green-500 text-xm">
-                        Rs {item.raisedAmount} raised
-                      </span>
-                      <span className="cursor-pointer text-sm underline underline-offset-2">
-                        <Link href={"/dashboard"}>Dashboard</Link>
-                      </span>
+        <div className=" h-[22.3rem] flex flex-col gap-2  mt-2 rounded-md  ">
+          {pageDetails && pageDetails.length > 0 ? (
+            pageDetails.map((item) => {
+              return (
+                <div
+                  key={item._id}
+                  className="w-full h-[4rem] flex  overflow-hidden  justify-between items-center border-b px-3 py-2"
+                >
+                  <div className="flex gap-5 w-2/5">
+                    <div className="bg-slate-500 rounded overflow-hidden w-16 h-10">
+                      <img
+                        src={`${item.coverImage}`}
+                        alt=""
+                        className=" object-cover   w-16"
+                      />
                     </div>
-                  );
-                })
-              ) : (
-                <p>No pages available.</p>
-              )}
-            </div>
-          </div>
+                    <span className="text-xl ">{item.title}</span>
+                  </div>
 
-          <div className="w-1/4">
-            <h2 className="text-xl mt-2 font-semibold">Recent donations</h2>
-            <div className=" h-full flex flex-col gap-2 pl-2 ">
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
+                  <div className="text-green-500 text-xm">
+                    Rs {item.raisedAmount} raised
+                  </div>
+
+                  <Link href={`/c/${item._id}`}>
+                    <FaRegShareFromSquare size={20} />
+                  </Link>
                 </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 "></div>
-                <div>
-                  <h2>Sasdsd oweoe</h2>
-                  <h4 className="text-xs">Rs 500</h4>
-                </div>
-              </div>
-            </div>
-          </div>
+              );
+            })
+          ) : (
+            <p>No pages available.</p>
+          )}
         </div>
       </div>
     </div>

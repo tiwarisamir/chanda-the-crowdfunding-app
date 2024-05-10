@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 import crypto from "crypto";
+import connectDB from "@/db/connectDB";
+import Payment from "@/models/Payment";
 
-export const createSignature = (message) => {
-  const secret = "8gBm/:&EnhH.1/q"; //different in production
+export const createSignature = (message, secret) => {
+  // const secret = "8gBm/:&EnhH.1/q"; //different in production
   // Create an HMAC-SHA256 hash
   const hmac = crypto.createHmac("sha256", secret);
   hmac.update(message);
@@ -15,48 +17,57 @@ export const createSignature = (message) => {
 
 export async function POST(req, res) {
   const data = await req.json();
-
-  // console.log("request yo ho: ", data);
+  // console.log("pay bata aako data : ", data);
 
   // return NextResponse.json(data);
+  const transaction_uuid = uuidv4();
 
-  const order = {
-    payment_method: "esewa",
-    amount: 100,
-    _id: uuidv4(),
-  };
   try {
+    await connectDB();
+
+    const newPayment = new Payment({
+      name: data.name,
+      from_user: data.from_user,
+      to_page: data.to_page,
+      transaction_uuid: transaction_uuid,
+      message: data.message,
+      amount: data.amount,
+      payment_method: data.payment_method,
+      esewaSecret: data.esewaSecret,
+    });
+
+    await newPayment.save();
+
     const signature = createSignature(
-      `total_amount=${order.amount},transaction_uuid=${order._id},product_code=EPAYTEST`
+      `total_amount=${data.amount},transaction_uuid=${transaction_uuid},product_code=${data.esewaProductCode}`,
+      data.esewaSecret
     );
-    if (order.payment_method === "esewa") {
+    if (data.payment_method === "esewa") {
       const formData = {
-        amount: order.amount,
-        failure_url: "http://localhost:5173",
+        amount: data.amount,
+        failure_url: "http://localhost:3000",
         product_delivery_charge: "0",
         product_service_charge: "0",
-        product_code: "EPAYTEST",
+        product_code: data.esewaProductCode,
         signature: signature,
         signed_field_names: "total_amount,transaction_uuid,product_code",
         success_url: "http://localhost:3000/api/success",
         tax_amount: "0",
-        total_amount: order.amount,
-        transaction_uuid: order._id,
+        total_amount: data.amount,
+        transaction_uuid: transaction_uuid,
       };
 
       const responseData = {
         message: "Order Created Sucessfully",
-        order,
-        payment_method: "esewa",
         formData,
       };
 
       return NextResponse.json(responseData);
     }
   } catch (err) {
-    // return res.status(400).json({ error: err?.message || "No Orders found" });
+    console.log("error in handlePay: ", err);
     return NextResponse.json({
-      error: err?.message || "No Orders found",
+      error: err?.message || "Something went wrong",
     });
   }
 }
