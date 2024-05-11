@@ -29,8 +29,9 @@ export async function GET(req, res) {
         message: "integrity error",
       });
     }
-    donation.raisedAmount = donation.raisedAmount + decodeData.total_amount;
-    // donation.donationCount = donation.donationCount + 1;
+    donation.raisedAmount =
+      Number(donation.raisedAmount) + Number(decodeData.total_amount);
+    donation.donationCount = Number(donation.donationCount) + 1;
 
     await donation.save();
 

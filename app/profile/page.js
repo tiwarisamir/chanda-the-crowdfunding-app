@@ -132,13 +132,13 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className=" h-[22.3rem] flex flex-col gap-2  mt-2 rounded-md  ">
+        <div className=" h-[22.3rem] flex flex-col gap-2  overflow-y-auto mt-2 rounded-md  ">
           {pageDetails && pageDetails.length > 0 ? (
             pageDetails.map((item) => {
               return (
                 <div
                   key={item._id}
-                  className="w-full h-[4rem] flex  overflow-hidden  justify-between items-center border-b px-3 py-2"
+                  className="w-full h-[4rem] flex    justify-between items-center border-b px-3 py-2"
                 >
                   <div className="flex gap-5 w-2/5">
                     <div className="bg-slate-500 rounded overflow-hidden w-16 h-10">

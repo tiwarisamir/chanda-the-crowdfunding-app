@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import User from "@/models/User";
+import { getServerSession } from "next-auth";
 import donationPage from "@/models/donationPage";
 import connectDB from "@/db/connectDB";
 import Payment from "@/models/Payment";
+import Post from "@/models/Post";
+import Comment from "@/models/Comment";
 
 export async function GET(req, res) {
   try {
@@ -10,22 +13,18 @@ export async function GET(req, res) {
 
     const id = await req.url.split("=")[1];
 
-    const pageDetail = await donationPage.findOne({ _id: id });
-    const organiser = await User.findOne({ _id: pageDetail.user });
-    const pay = await Payment.find({ to_page: id });
+    const commentDetail = await Comment.find({ post: id });
 
-    if (pageDetail) {
+    if (commentDetail) {
       return NextResponse.json({
         success: true,
-        organiser: organiser,
-        pageDetails: pageDetail,
-        recentDonation: pay,
+        comment: commentDetail,
       });
     }
 
     return NextResponse.json({
       success: false,
-      message: "User not found",
+      message: "page not found",
     });
   } catch (err) {
     console.log("error aayo: ", err);

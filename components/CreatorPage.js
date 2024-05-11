@@ -15,11 +15,18 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
     <>
       <div>
         <div className="  relative flex justify-center  w-full ">
-          <img
-            src="https://img.freepik.com/free-photo/business-concept-close-up-portrait-young-beautiful-attractive-ginger-red-hair-girl-smiling-showing-b_1258-124915.jpg?t=st=1714540877~exp=1714544477~hmac=a6cd9768e2f292ddd4356b021cb3f9029666000516eddfcc781b0a616e49da70&w=826"
-            alt=""
-            className="object-cover w-full h-[22rem]  "
-          />
+          {pageDetails.coverImage && pageDetails.coverImage.length > 0 ? (
+            <img
+              src={`${pageDetails.coverImage}`}
+              alt=""
+              className="object-cover w-full h-[22rem]  "
+            />
+          ) : (
+            <div className="w-full h-[22rem] bg-slate-800 flex justify-center items-center">
+              {" "}
+              <h1 className="text-2xl">No image to show</h1>
+            </div>
+          )}
 
           <div className="glass p-5 w-72 absolute -bottom-[13rem] flex flex-col justify-center items-center  ">
             <div className=" flex justify-center items-center text-center  rounded-3xl w-36 h-36  overflow-hidden ">
@@ -39,10 +46,8 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
             </div>
             <div className="flex flex-col  items-center justify-center">
               <h1 className="text-xl font-semibold">{userDetails.username}</h1>
-              <h3 className="text-center my-2">
-                Lorem ipsum dolor sit amet consectetur.
-              </h3>
-              <h3>2000 Suppoters - 12 Posts</h3>
+              <h3 className="text-center my-2">{userDetails.bio}</h3>
+              <h3>{pageDetails.donationCount} Suppoters </h3>
 
               <div className="flex my-3 gap-5">
                 <a href="#">
@@ -75,8 +80,8 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
             <Pay pageDetails={pageDetails} recentDonation={recentDonation} />
           </div>
         </div>
-        <div>
-          <Posts />
+        <div className="flex justify-center items-center w-full">
+          <Posts pageDetails={pageDetails} />
         </div>
       </div>
     </>

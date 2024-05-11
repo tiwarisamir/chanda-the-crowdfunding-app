@@ -1,5 +1,6 @@
 "use client";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
@@ -41,6 +42,7 @@ const Creator = () => {
     const data = await res.json();
     if (data.success) {
       toast.success(data.message);
+      router.push("/profile");
     }
   };
   return (
@@ -86,7 +88,7 @@ const Creator = () => {
                 </div>
               </div>
 
-              <div className="text-center mt-6">
+              <div className="text-center flex gap-3 mt-6">
                 <button
                   type="submit"
                   className=" bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-5 py-2.5 text-center me-2 mb-2 w-full"
@@ -94,6 +96,12 @@ const Creator = () => {
                 >
                   Create
                 </button>
+                <Link
+                  href={"/profile"}
+                  className=" text-lg px-5 py-2.5 text-center  mb-2 w-full"
+                >
+                  Cancel
+                </Link>
               </div>
             </form>
           </div>

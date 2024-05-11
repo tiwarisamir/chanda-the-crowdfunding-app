@@ -53,7 +53,7 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  const register = async (username, email, password) => {
+  const register = async (username, email, password, bio) => {
     try {
       const res = await fetch("http://localhost:3000/api/register", {
         method: "POST",
@@ -61,7 +61,7 @@ const ContextProvider = ({ children }) => {
           username: username,
           email: email,
           password: password,
-          // bio:bio,
+          bio: bio,
         }),
         headers: {
           "content-type": "application/json",
@@ -113,9 +113,10 @@ const ContextProvider = ({ children }) => {
 
       if (res.ok) {
         const resData = await res.json();
-        console.log(resData);
+        // console.log(resData);
         toast.success(resData.message);
         setrefresh(!refresh);
+        router.push("/profile");
       }
     } catch (err) {
       toast.error(err.resData.data.message);

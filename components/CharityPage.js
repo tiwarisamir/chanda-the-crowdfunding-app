@@ -29,13 +29,21 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
               )}
             </div>
 
-            <Image
-              src={`${pageDetails.coverImage}`}
-              width={600}
-              height={300}
-              alt="fund raiser image"
-              className="w-full h-[25rem] object-cover rounded-lg "
-            />
+            {pageDetails.coverImage && pageDetails.coverImage.length > 0 ? (
+              <Image
+                src={`${pageDetails.coverImage}`}
+                width={600}
+                height={300}
+                alt="fund raiser image"
+                className="w-full h-[25rem] object-cover rounded-lg "
+              />
+            ) : (
+              <div className="w-full h-[25rem] bg-slate-800 flex justify-center items-center">
+                {" "}
+                <h1 className="text-2xl">No image to show</h1>
+              </div>
+            )}
+
             <div className="w-full flex items-center gap-2">
               <div className="bg-slate-700 flex justify-center items-center w-[3.5rem] h-[3.5rem] ml-2 rounded-full">
                 <img
@@ -58,7 +66,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
               </span>
               raised of Rs {pageDetails.targetAmount}
             </h1>
-            <h4 className="text-sm">2000 donations</h4>
+            <h4 className="text-sm">{pageDetails.donationCount} donations</h4>
             <a
               href="#donate"
               className="bg-green-600 hover:bg-green-500 px-3 py-2 rounded-lg  text-lg text-center font-bold"
@@ -113,8 +121,8 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
           <Pay pageDetails={pageDetails} recentDonation={recentDonation} />
         </div>
 
-        <div className="w-[80%]">
-          <Posts />
+        <div className="flex justify-center items-center w-full">
+          <Posts pageDetails={pageDetails} />
         </div>
       </div>
     </>

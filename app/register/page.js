@@ -9,7 +9,7 @@ const page = () => {
   const username = useRef();
   const email = useRef();
   const password = useRef();
-  // const bio = useRef();
+  const bio = useRef();
   const { isAuth, register } = useContext(Context);
   const router = useRouter();
 
@@ -18,12 +18,13 @@ const page = () => {
     register(
       username.current.value,
       email.current.value,
-      password.current.value
-      // bio.current.value
+      password.current.value,
+      bio.current.value
     );
-    // username.current.value = "";
-    // email.current.value = "";
-    // password.current.value = "";
+    username.current.value = "";
+    email.current.value = "";
+    password.current.value = "";
+    bio.current.value = "";
   };
 
   useEffect(() => {
@@ -46,14 +47,14 @@ const page = () => {
                   placeholder="username"
                 />
               </div>
-              {/* <div className="relative w-full mb-3">
+              <div className="relative w-full mb-3">
                 <input
                   ref={bio}
                   type="text"
                   className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-700 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="bio"
                 />
-              </div> */}
+              </div>
               <div className="relative w-full mb-3">
                 <input
                   ref={email}

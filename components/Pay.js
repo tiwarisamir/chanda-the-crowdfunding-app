@@ -27,7 +27,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
       selectedMethod !== 0
     ) {
       const esewaCall = (formData) => {
-        console.log("form ko data in ecewa function: ", formData);
+        // console.log("form ko data in ecewa function: ", formData);
         var path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
 
         var form = document.createElement("form");

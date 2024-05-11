@@ -7,7 +7,7 @@ const pageSchema = new Schema({
   description: { type: String },
   targetAmount: { type: Number },
   raisedAmount: { type: Number, default: 0 },
-  // donationCount: { type: Number, default: 0 },
+  donationCount: { type: Number, default: 0 },
   esewaProductCode: { type: String },
   esewaSecret: { type: String },
   user: {
