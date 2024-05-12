@@ -92,7 +92,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
           {recentDonation && recentDonation.length > 0 ? (
             recentDonation.map((item) => {
               return (
-                <li key={item._id} className="my-2 flex gap-3 items-center">
+                <li key={item?._id} className="my-2 flex gap-3 items-center">
                   <div>
                     <div className="relative w-[1rem] h-[1rem] overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
                       <svg
@@ -110,8 +110,8 @@ const Pay = ({ pageDetails, recentDonation }) => {
                     </div>
                   </div>
                   <span className="">
-                    {item.name} donated{" "}
-                    <span className="font-bold">Rs {item.amount}</span> with
+                    {item?.name} donated{" "}
+                    <span className="font-bold">Rs {item?.amount}</span> with
                     message &quot;{item.message}&quot;
                   </span>
                 </li>

@@ -134,8 +134,8 @@ const Posts = ({ pageDetails }) => {
         <div className="w-full flex ">
           <h1 className=" text-2xl w-full  font-bold ">Recent posts </h1>
 
-          {user._id === pageDetails.user && (
-            <Link href={`/createpost/${pageDetails._id}`}>
+          {user?._id === pageDetails.user && (
+            <Link href={`/createpost/${pageDetails?._id}`}>
               <FaRegEdit size={25} />
             </Link>
           )}
@@ -144,7 +144,7 @@ const Posts = ({ pageDetails }) => {
           {posts && posts.length > 0 ? (
             posts.map((item) => {
               return (
-                <div key={item._id} className="bg-slate-900 p-5 rounded-xl">
+                <div key={item?._id} className="bg-slate-900 p-5 rounded-xl">
                   {item.coverImage.length > 0 && (
                     <div className="bg-slate-700 w-full h-[15rem] rounded-lg flex justify-center items-center">
                       <img
@@ -155,18 +155,18 @@ const Posts = ({ pageDetails }) => {
                     </div>
                   )}
 
-                  <p className="mt-2">{item.caption}</p>
+                  <p className="mt-2">{item?.caption}</p>
                   <div className="flex justify-around pt-2">
                     <button
                       className="hover:bg-slate-800  w-full flex justify-center items-center gap-2 rounded-lg py-2"
-                      onClick={() => handleLike(item._id)}
+                      onClick={() => handleLike(item?._id)}
                     >
                       <FaRegHeart size={20} />{" "}
-                      <span className="text-lg">{item.like}</span>
+                      <span className="text-lg">{item?.like}</span>
                     </button>
                     <button
                       className=" hover:bg-slate-800 w-full flex justify-center rounded-lg py-2"
-                      onClick={() => toggleDropdown(item._id)}
+                      onClick={() => toggleDropdown(item?._id)}
                     >
                       <FaRegComment size={20} />
                     </button>
@@ -181,12 +181,12 @@ const Posts = ({ pageDetails }) => {
                         {comments[item._id] && comments[item._id].length > 0 ? (
                           comments[item._id].map((item) => {
                             return (
-                              <div key={item._id}>
+                              <div key={item?._id}>
                                 <div className="flex gap-2 items-center">
                                   <div className="w-5 h-5  rounded-full">
-                                    {item.profilePic ? (
+                                    {item?.profilePic ? (
                                       <img
-                                        src={`${item.profilePic}`}
+                                        src={`${item?.profilePic}`}
                                         alt="Profile picture"
                                         className=" object-cover  rounded-full w-[1.25rem] h-[1.25rem]"
                                       />
@@ -199,10 +199,10 @@ const Posts = ({ pageDetails }) => {
                                     )}
                                   </div>
                                   <span className="text-sm ">
-                                    {item.username}
+                                    {item?.username}
                                   </span>
                                 </div>
-                                <p className="text-xs ml-7">{item.comment}</p>
+                                <p className="text-xs ml-7">{item?.comment}</p>
                               </div>
                             );
                           })
@@ -224,7 +224,7 @@ const Posts = ({ pageDetails }) => {
                         />
                         <button
                           className=" cursor-pointer right-5"
-                          onClick={() => handleComment(item._id)}
+                          onClick={() => handleComment(item?._id)}
                         >
                           <FiSend size={20} />
                         </button>

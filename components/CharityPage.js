@@ -39,7 +39,6 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
               />
             ) : (
               <div className="w-full h-[25rem] bg-slate-800 flex justify-center items-center">
-                {" "}
                 <h1 className="text-2xl">No image to show</h1>
               </div>
             )}
@@ -53,7 +52,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
                 />
               </div>
               <div>
-                <h1 className="text-lg font-bold">{userDetails.username}</h1>
+                <h1 className="text-lg font-bold">{userDetails?.username}</h1>
                 <h4 className="text-sm">Organiser</h4>
               </div>
             </div>
@@ -62,9 +61,9 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
           <div className="bg-slate-900 flex flex-col gap-2 rounded-lg p-4 w-2/4 ">
             <h1 className="text-sm">
               <span className="font-bold text-xl ">
-                Rs {pageDetails.raisedAmount}{" "}
+                Rs {pageDetails?.raisedAmount}{" "}
               </span>
-              raised of Rs {pageDetails.targetAmount}
+              raised of Rs {pageDetails?.targetAmount}
             </h1>
             <h4 className="text-sm">{pageDetails?.donationCount} donations</h4>
             <a
@@ -90,7 +89,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
               {recentDonation && recentDonation.length > 0 ? (
                 recentDonation.map((item) => {
                   return (
-                    <div key={item._id} className="flex items-center gap-2">
+                    <div key={item?._id} className="flex items-center gap-2">
                       <div className="w-[2rem] h-[2rem] rounded-full bg-slate-700 ">
                         <img
                           src="/defaultProfile.webp"
