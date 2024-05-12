@@ -15,9 +15,9 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
     <>
       <div>
         <div className="  relative flex justify-center  w-full ">
-          {pageDetails.coverImage && pageDetails.coverImage.length > 0 ? (
+          {pageDetails?.coverImage && pageDetails?.coverImage?.length > 0 ? (
             <img
-              src={`${pageDetails.coverImage}`}
+              src={`${pageDetails?.coverImage}`}
               alt=""
               className="object-cover w-full h-[22rem]  "
             />

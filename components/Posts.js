@@ -145,7 +145,7 @@ const Posts = ({ pageDetails }) => {
             posts.map((item) => {
               return (
                 <div key={item?._id} className="bg-slate-900 p-5 rounded-xl">
-                  {item.coverImage.length > 0 && (
+                  {item?.coverImage?.length > 0 && (
                     <div className="bg-slate-700 w-full h-[15rem] rounded-lg flex justify-center items-center">
                       <img
                         src={`${item?.coverImage}`}

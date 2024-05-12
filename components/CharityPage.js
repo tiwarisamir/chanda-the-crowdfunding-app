@@ -29,7 +29,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
               )}
             </div>
 
-            {pageDetails.coverImage && pageDetails.coverImage.length > 0 ? (
+            {pageDetails?.coverImage && pageDetails?.coverImage?.length > 0 ? (
               <Image
                 src={`${pageDetails?.coverImage}`}
                 width={600}
