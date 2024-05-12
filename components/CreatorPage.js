@@ -70,7 +70,7 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
               <h1 className="ml-5 text-2xl w-full font-bold ">
                 {pageDetails?.title}
               </h1>
-              {user._id === pageDetails.user && (
+              {user?._id === pageDetails?.user && (
                 <Link href={`/edit/pages/c/${pageDetails?._id}`}>
                   <FaRegEdit size={20} />
                 </Link>

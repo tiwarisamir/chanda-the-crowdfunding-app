@@ -99,8 +99,8 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
                         />
                       </div>
                       <div>
-                        <h2>{item.name}</h2>
-                        <h4 className="text-xs">Rs {item.amount}</h4>
+                        <h2>{item?.name}</h2>
+                        <h4 className="text-xs">Rs {item?.amount}</h4>
                       </div>
                     </div>
                   );
@@ -114,7 +114,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
 
         <div className="w-[80%] bg-slate-900 p-4 rounded-lg">
           <h2 className="text-xl font-bold">Message from Organiser</h2>
-          <p>{pageDetails.description}</p>
+          <p>{pageDetails?.description}</p>
         </div>
 
         <div id="donate" className="w-[80%]">
