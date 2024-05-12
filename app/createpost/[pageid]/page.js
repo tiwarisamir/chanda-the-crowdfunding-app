@@ -1,47 +1,48 @@
 "use client";
+import { Context } from "@/store/store";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { SingleImageDropzone } from "@/components/single-image-dropzone";
+import { useEdgeStore } from "@/lib/edgestore";
 
 const CreatePost = ({ params }) => {
   const { data: session, status } = useSession();
-
+  const { isAuth } = useContext(Context);
+  const [file, setfile] = useState();
   const caption = useRef();
-  const coverImage = useRef();
-
+  const { edgestore } = useEdgeStore();
   const router = useRouter();
-
-  useEffect(() => {
-    if (!session && status !== "loading") {
-      router.push("/");
-    }
-  }, [session, status, router]);
 
   const handelCreate = async (e) => {
     e.preventDefault();
+    if (file) {
+      const image = await edgestore.myPublicImage.upload({ file });
+      if (caption.current.value.length > 0) {
+        const res = await fetch("/api/createpost", {
+          method: "POST",
+          body: JSON.stringify({
+            caption: caption.current.value,
+            coverImage: image?.url,
+            page: params.pageid,
+          }),
+          headers: {
+            "content-type": "application/json",
+          },
+        });
 
-    if (caption.current.value.length > 0) {
-      const res = await fetch("http://localhost:3000/api/createpost", {
-        method: "POST",
-        body: JSON.stringify({
-          caption: caption.current.value,
-          coverImage: coverImage.current.value,
-          page: params.pageid,
-        }),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
-
-      const data = await res.json();
-      if (data.success) {
-        toast.success(data.message);
-        router.push(`/c/${params.pageid}`);
+        const data = await res.json();
+        if (data.success) {
+          toast.success(data.message);
+          router.push(`/c/${params.pageid}`);
+        }
+      } else {
+        toast.error("Please write caption");
       }
     } else {
-      toast.error("Please write caption");
+      toast.error("please upload image");
     }
   };
   return (
@@ -50,12 +51,16 @@ const CreatePost = ({ params }) => {
         <div className="relative glass p-5 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
           <div className="flex-auto px-6  py-2">
             <form>
-              <div className="relative w-full mb-3">
-                <input
-                  ref={coverImage}
-                  type="text"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-700 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="banner image url"
+              <div className="relative flex justify-center w-full mb-3">
+                <SingleImageDropzone
+                  className="w-full"
+                  width={100}
+                  height={100}
+                  value={file}
+                  // dropzoneOptions={{ maxSize: 1024 * 1024 * 1 }}
+                  onChange={(file) => {
+                    setfile(file);
+                  }}
                 />
               </div>
 

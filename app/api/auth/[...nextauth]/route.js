@@ -5,6 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "@/db/connectDB";
 import User from "@/models/User";
 import bcrypt from "bcrypt";
+import { NextResponse } from "next/server";
 
 export const authoptions = NextAuth({
   providers: [
@@ -68,15 +69,15 @@ export const authoptions = NextAuth({
       session.user.name = dbUser?.username;
       return session;
     },
-    async jwt({ token, account, profile }) {
-      const dbUser = await User.findOne({ email: token.email });
+    // async jwt({ token, account, profile }) {
+    //   const dbUser = await User.findOne({ email: token.email });
 
-      if (account) {
-        token.accessToken = account.access_token;
-        token.id = dbUser?._id;
-      }
-      return token;
-    },
+    //   if (account) {
+    //     token.accessToken = account.access_token;
+    //     token.id = dbUser?._id;
+    //   }
+    //   return token;
+    // },
   },
 });
 

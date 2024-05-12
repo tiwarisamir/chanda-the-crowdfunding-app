@@ -21,15 +21,12 @@ const Posts = ({ pageDetails }) => {
     try {
       const fetchComment = async () => {
         setisLoading(true);
-        const res = await fetch(
-          `http://localhost:3000/api/getcomment/id?=${postId}`,
-          {
-            method: "GET",
-            headers: {
-              "content-type": "application/json",
-            },
-          }
-        );
+        const res = await fetch(`/api/getcomment/id?=${postId}`, {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        });
         const data = await res.json();
         if (data.success) {
           setcomments((prevState) => ({
@@ -60,7 +57,7 @@ const Posts = ({ pageDetails }) => {
 
   const handleLike = async (id) => {
     if (isAuth) {
-      const res = await fetch("http://localhost:3000/api/updatepost", {
+      const res = await fetch("/api/updatepost", {
         method: "PUT",
         body: JSON.stringify({
           updateType: "LIKE",
@@ -82,7 +79,7 @@ const Posts = ({ pageDetails }) => {
 
   const handleComment = async (id) => {
     if (isAuth) {
-      const res = await fetch("http://localhost:3000/api/updatepost", {
+      const res = await fetch("/api/updatepost", {
         method: "PUT",
         body: JSON.stringify({
           updateType: "COMMENT",
@@ -111,15 +108,12 @@ const Posts = ({ pageDetails }) => {
     try {
       const fetchPost = async () => {
         setisLoading(true);
-        const res = await fetch(
-          `http://localhost:3000/api/getpost/id?=${pageDetails._id}`,
-          {
-            method: "GET",
-            headers: {
-              "content-type": "application/json",
-            },
-          }
-        );
+        const res = await fetch(`/api/getpost/id?=${pageDetails._id}`, {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+          },
+        });
         const data = await res.json();
         if (data.success) {
           setposts(data.postDetails);

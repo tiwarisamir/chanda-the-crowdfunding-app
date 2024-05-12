@@ -45,13 +45,13 @@ export async function POST(req, res) {
     if (data.payment_method === "esewa") {
       const formData = {
         amount: data.amount,
-        failure_url: "http://localhost:3000",
+        failure_url: `${process.env.NEXTAUTH_URL}/c/${data.to_page}`,
         product_delivery_charge: "0",
         product_service_charge: "0",
         product_code: data.esewaProductCode,
         signature: signature,
         signed_field_names: "total_amount,transaction_uuid,product_code",
-        success_url: "http://localhost:3000/api/success",
+        success_url: `${process.env.NEXTAUTH_URL}/api/success`,
         tax_amount: "0",
         total_amount: data.amount,
         transaction_uuid: transaction_uuid,

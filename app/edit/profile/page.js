@@ -4,6 +4,8 @@ import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { Context } from "@/store/store";
 import Link from "next/link";
+import { SingleImageDropzone } from "@/components/single-image-dropzone";
+import { useEdgeStore } from "@/lib/edgestore";
 
 const page = () => {
   const { isAuth, user, editProfile } = useContext(Context);
@@ -12,7 +14,9 @@ const page = () => {
     bio: user.bio || "",
     profilepic: user.profilepic || "",
   });
+  const [file, setfile] = useState();
   const router = useRouter();
+  const { edgestore } = useEdgeStore();
 
   const handleChange = (e) => {
     setuserDetails({ ...userDetails, [e.target.name]: e.target.value });
@@ -20,10 +24,14 @@ const page = () => {
 
   const handelEditProfile = async (e) => {
     e.preventDefault();
-    editProfile(userDetails.username, userDetails.bio, userDetails.profilepic);
-    // userDetails.username:
-    // userDetails.bio: "";
-    // userDetails.profilepic: "";
+    let image;
+    if (file) {
+      image = await edgestore.myPublicImage.upload({ file });
+    }
+    editProfile(userDetails.username, userDetails.bio, image?.url);
+    userDetails.username = "";
+    userDetails.bio = "";
+    setfile();
   };
 
   // useEffect(() => {
@@ -58,14 +66,16 @@ const page = () => {
                   placeholder="Enter your bio"
                 />
               </div>
-              <div className="relative w-full mb-3">
-                <input
-                  value={userDetails.profilepic}
-                  onChange={handleChange}
-                  name="profilepic"
-                  type="text"
-                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-700 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="Enter profile picture url"
+              <div className="relative w-full flex justify-center mb-3">
+                <SingleImageDropzone
+                  className="w-full"
+                  width={100}
+                  height={100}
+                  value={file}
+                  // dropzoneOptions={{ maxSize: 1024 * 1024 * 1 }}
+                  onChange={(file) => {
+                    setfile(file);
+                  }}
                 />
               </div>
 

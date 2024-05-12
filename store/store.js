@@ -13,10 +13,12 @@ export const Context = createContext({
   logout: () => {},
   register: () => {},
   editProfile: () => {},
+  setrefresh: () => {},
+  refresh: false,
 });
 
 const ContextProvider = ({ children }) => {
-  const [isAuth, setisAuth] = useState(false);
+  const [isAuth, setisAuth] = useState();
   const [user, setuser] = useState({});
   const [refresh, setrefresh] = useState(false);
   const [pageDetails, setpageDetails] = useState([]);
@@ -34,17 +36,21 @@ const ContextProvider = ({ children }) => {
   const login = async (loginType, email, password) => {
     try {
       if (loginType === "credentials") {
-        signIn("credentials", {
+        const res = await signIn("credentials", {
           email: email,
           password: password,
           redirect: false,
         });
+        if (!res.ok) {
+          toast.error("invalid email or password");
+        }
       } else if (loginType === "google") {
         signIn("google");
+        toast.success("login successfully");
       } else if (loginType === "github") {
         signIn("github");
+        toast.success("login successfully");
       }
-      toast.success("login successfully");
 
       setrefresh(!refresh);
     } catch (error) {
@@ -53,15 +59,16 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  const register = async (username, email, password, bio) => {
+  const register = async (username, email, password, bio, profilepic) => {
     try {
-      const res = await fetch("http://localhost:3000/api/register", {
+      const res = await fetch("/api/register", {
         method: "POST",
         body: JSON.stringify({
           username: username,
           email: email,
           password: password,
           bio: bio,
+          profilepic: profilepic,
         }),
         headers: {
           "content-type": "application/json",
@@ -70,7 +77,7 @@ const ContextProvider = ({ children }) => {
 
       if (res.ok) {
         const resData = await res.json();
-        console.log(resData);
+        // console.log(resData);
 
         signIn("credentials", {
           email: resData.userdetail.email,
@@ -83,13 +90,14 @@ const ContextProvider = ({ children }) => {
         setrefresh(!refresh);
       }
     } catch (err) {
-      toast.error(err.response.data.message);
+      console.log(err);
     }
   };
 
   const logout = async () => {
     try {
       await signOut();
+      setisAuth(false);
       toast.success("Logged out successfully");
     } catch (error) {
       toast.error(error.response.data.message);
@@ -98,7 +106,7 @@ const ContextProvider = ({ children }) => {
 
   const editProfile = async (username, bio, profilepic) => {
     try {
-      const res = await fetch("http://localhost:3000/api/editprofile", {
+      const res = await fetch("/api/editprofile", {
         method: "POST",
         body: JSON.stringify({
           username: username,
@@ -127,7 +135,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     try {
       const fetchProfile = async () => {
-        const res = await fetch(`http://localhost:3000/api/getprofile`, {
+        const res = await fetch(`/api/getprofile`, {
           method: "GET",
           headers: {
             "content-type": "application/json",
@@ -143,6 +151,7 @@ const ContextProvider = ({ children }) => {
 
       fetchProfile();
     } catch (err) {
+      console.log(err);
       setuser({});
     }
   }, [refresh]);
@@ -158,6 +167,8 @@ const ContextProvider = ({ children }) => {
         pageDetails,
         paymentDetails,
         editProfile,
+        setrefresh,
+        refresh,
       }}
     >
       {children}

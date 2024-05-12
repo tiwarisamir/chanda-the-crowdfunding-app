@@ -39,9 +39,7 @@ export async function GET(req, res) {
     paymentData.transaction_code = decodeData.transaction_uuid;
     await paymentData.save();
 
-    return NextResponse.redirect(
-      `http://localhost:3000/c/${paymentData.to_page}`
-    );
+    return NextResponse.redirect(`/c/${paymentData.to_page}`);
   } catch (err) {
     console.log("error in success: ", err);
     return NextResponse.json({

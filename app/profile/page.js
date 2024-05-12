@@ -1,5 +1,4 @@
 "use client";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useState } from "react";
@@ -8,9 +7,9 @@ import { Context } from "../../store/store";
 
 const Dashboard = () => {
   const [showDropdown, setshowDropdown] = useState(false);
-  const { data: session, status } = useSession();
   const router = useRouter();
   const { isAuth, user, pageDetails, paymentDetails } = useContext(Context);
+
   const donated = paymentDetails.reduce(
     (total, item) => total + item.amount,
     0
@@ -21,12 +20,12 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="flex gap-5 items-center  p-3">
+    <div className="flex gap-5   p-3">
       <div className="w-1/4 flex flex-col gap-4  p-5 items-center overflow-hidden  glass">
         <div className=" overflow-hidden flex justify-center  rounded-full  ">
-          {session?.user?.image ? (
+          {user?.profilepic ? (
             <img
-              src={`${user?.profilepic}`}
+              src={`${user.profilepic}`}
               alt="Profile picture"
               className=" w-36 h-36 object-cover"
             />

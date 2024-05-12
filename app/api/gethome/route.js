@@ -1,25 +1,22 @@
 import { NextResponse } from "next/server";
+import donationPage from "@/models/donationPage";
 import connectDB from "@/db/connectDB";
-import Post from "@/models/Post";
 
 export async function GET(req, res) {
   try {
     await connectDB();
+    const pageDetails = await donationPage.find({}).limit(6);
 
-    const id = await req.url.split("=")[1];
-
-    const postDetail = await Post.find({ page: id });
-
-    if (postDetail) {
+    if (pageDetails) {
       return NextResponse.json({
         success: true,
-        postDetails: postDetail,
+
+        pageDetails: pageDetails,
       });
     }
-
     return NextResponse.json({
       success: false,
-      message: "page not found",
+      message: "No page to show",
     });
   } catch (err) {
     console.log("error aayo: ", err);

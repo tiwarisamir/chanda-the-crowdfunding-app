@@ -34,7 +34,7 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
                 <img
                   src={`${userDetails.profilepic}`}
                   alt="Profile picture"
-                  className=" object-cover  rounded-full w-36"
+                  className=" object-cover  rounded-full w-36 h-36"
                 />
               ) : (
                 <img

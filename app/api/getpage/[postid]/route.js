@@ -12,7 +12,7 @@ export async function GET(req, res) {
 
     const pageDetail = await donationPage.findOne({ _id: id });
     const organiser = await User.findOne({ _id: pageDetail.user });
-    const pay = await Payment.find({ to_page: id });
+    const pay = await Payment.find({ to_page: id, done: true });
 
     if (pageDetail) {
       return NextResponse.json({
