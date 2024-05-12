@@ -144,8 +144,8 @@ export default function Home({ searchParams }) {
                   className=" rounded-full    object-cover w-[10rem] h-[10rem] transition-transform duration-300 transform hover:scale-105"
                 />
                 <p>
-                  You want to raise money for charity? Then it's the best for
-                  you start!
+                  You want to raise money for charity? Then it&apos;s the best
+                  for you start!
                 </p>
                 <span className="hover:text-blue-500 cursor-pointer">
                   Read more...

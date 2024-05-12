@@ -33,6 +33,7 @@ const Login = () => {
       router.push("/");
     }
   }, [isAuth]);
+
   return (
     <div className="min-h-[80.7vh] flex justify-center items-center">
       <div className="w-full md:w-4/12 px-4 mt-5 mx-auto ">

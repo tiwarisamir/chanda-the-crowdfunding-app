@@ -112,7 +112,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
                   <span className="">
                     {item.name} donated{" "}
                     <span className="font-bold">Rs {item.amount}</span> with
-                    message "{item.message}"
+                    message &quot;{item.message}&quot;
                   </span>
                 </li>
               );

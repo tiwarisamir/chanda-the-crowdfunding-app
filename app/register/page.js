@@ -6,7 +6,7 @@ import { Context } from "@/store/store";
 import { useEdgeStore } from "@/lib/edgestore";
 import { SingleImageDropzone } from "@/components/single-image-dropzone";
 
-const page = () => {
+const Page = () => {
   const [file, setfile] = useState();
   const username = useRef();
   const email = useRef();
@@ -121,4 +121,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

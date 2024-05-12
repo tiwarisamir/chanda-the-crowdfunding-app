@@ -7,7 +7,7 @@ import Link from "next/link";
 import { SingleImageDropzone } from "@/components/single-image-dropzone";
 import { useEdgeStore } from "@/lib/edgestore";
 
-const page = () => {
+const Page = () => {
   const { isAuth, user, editProfile } = useContext(Context);
   const [userDetails, setuserDetails] = useState({
     username: user.username || "",
@@ -102,4 +102,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
