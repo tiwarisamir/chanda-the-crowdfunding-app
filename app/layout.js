@@ -17,6 +17,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" type="image/png" sizes="16x16" href="/icon.png" />
+      </head>
       <body className={inter.className}>
         <SessionWrapper>
           <EdgeStoreProvider>

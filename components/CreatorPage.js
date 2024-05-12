@@ -68,10 +68,10 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
           <div className="w-[80%] my-10 ">
             <div className="flex items-center ">
               <h1 className="ml-5 text-2xl w-full font-bold ">
-                {pageDetails.title}
+                {pageDetails?.title}
               </h1>
               {user._id === pageDetails.user && (
-                <Link href={`/edit/pages/c/${pageDetails._id}`}>
+                <Link href={`/edit/pages/c/${pageDetails?._id}`}>
                   <FaRegEdit size={20} />
                 </Link>
               )}

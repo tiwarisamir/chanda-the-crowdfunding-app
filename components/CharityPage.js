@@ -19,11 +19,11 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
           <div className="flex flex-col gap-2 w-3/4 items-center justify-center bg-slate-900 p-4 rounded-lg">
             <div className="w-full flex  ">
               <h1 className="text-2xl bg  font-bold w-full ">
-                {pageDetails.title}
+                {pageDetails?.title}
               </h1>
 
               {user._id === pageDetails.user && (
-                <Link href={`/edit/pages/h/${pageDetails._id}`}>
+                <Link href={`/edit/pages/h/${pageDetails?._id}`}>
                   <FaRegEdit size={20} />
                 </Link>
               )}
@@ -31,7 +31,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
 
             {pageDetails.coverImage && pageDetails.coverImage.length > 0 ? (
               <Image
-                src={`${pageDetails.coverImage}`}
+                src={`${pageDetails?.coverImage}`}
                 width={600}
                 height={300}
                 alt="fund raiser image"
@@ -47,7 +47,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
             <div className="w-full flex items-center gap-2">
               <div className="bg-slate-700 flex justify-center items-center w-[3.5rem] h-[3.5rem] ml-2 rounded-full">
                 <img
-                  src={`${userDetails.profilepic}`}
+                  src={`${userDetails?.profilepic}`}
                   alt="Profile picture"
                   className=" object-cover  rounded-full w-[3.5rem] h-[3.5rem]"
                 />
@@ -66,7 +66,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
               </span>
               raised of Rs {pageDetails.targetAmount}
             </h1>
-            <h4 className="text-sm">{pageDetails.donationCount} donations</h4>
+            <h4 className="text-sm">{pageDetails?.donationCount} donations</h4>
             <a
               href="#donate"
               className="bg-green-600 hover:bg-green-500 px-3 py-2 rounded-lg  text-lg text-center font-bold"

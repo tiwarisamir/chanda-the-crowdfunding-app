@@ -23,6 +23,7 @@ const Discover = () => {
       console.log("Error: ", err);
     }
   }, []);
+
   return (
     <div className=" flex  justify-center  items-center flex-wrap gap-2">
       {pageDetails && pageDetails.length > 0 ? (

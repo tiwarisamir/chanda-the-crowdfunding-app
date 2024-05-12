@@ -1,17 +1,9 @@
 "use client";
-import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { FaXTwitter } from "react-icons/fa6";
-import { AiFillInstagram } from "react-icons/ai";
-import { FaFacebookSquare } from "react-icons/fa";
-import Pay from "@/components/Pay";
-import Posts from "@/components/Posts";
 import CreatorPage from "@/components/CreatorPage";
 import CharityPage from "@/components/CharityPage";
-import { FaRegEdit } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
 
 const Profile = ({ params }) => {
   const { data: session, status } = useSession();
@@ -55,7 +47,7 @@ const Profile = ({ params }) => {
   // }, [session, status, router]);
 
   if (isLoading) {
-    return <p>Loading...</p>; // Render loading state while waiting for data
+    return <p>Loading...</p>;
   }
 
   return (
