@@ -22,7 +22,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
                 {pageDetails?.title}
               </h1>
 
-              {user._id === pageDetails.user && (
+              {user._id === pageDetails?.user && (
                 <Link href={`/edit/pages/h/${pageDetails?._id}`}>
                   <FaRegEdit size={20} />
                 </Link>

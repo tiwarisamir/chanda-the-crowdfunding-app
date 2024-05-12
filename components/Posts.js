@@ -85,9 +85,9 @@ const Posts = ({ pageDetails }) => {
           updateType: "COMMENT",
           postid: id,
           comment: newComment.current?.value,
-          user: user._id,
-          username: user.username,
-          profilePic: user.profilepic || "",
+          user: user?._id,
+          username: user?.username,
+          profilePic: user?.profilepic || "",
         }),
         headers: {
           "content-type": "application/json",
@@ -134,7 +134,7 @@ const Posts = ({ pageDetails }) => {
         <div className="w-full flex ">
           <h1 className=" text-2xl w-full  font-bold ">Recent posts </h1>
 
-          {user?._id === pageDetails.user && (
+          {user?._id === pageDetails?.user && (
             <Link href={`/createpost/${pageDetails?._id}`}>
               <FaRegEdit size={25} />
             </Link>

@@ -30,9 +30,9 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
 
           <div className="glass p-5 w-72 absolute -bottom-[13rem] flex flex-col justify-center items-center  ">
             <div className=" flex justify-center items-center text-center  rounded-3xl w-36 h-36  overflow-hidden ">
-              {userDetails.profilepic ? (
+              {userDetails?.profilepic ? (
                 <img
-                  src={`${userDetails.profilepic}`}
+                  src={`${userDetails?.profilepic}`}
                   alt="Profile picture"
                   className=" object-cover  rounded-full w-36 h-36"
                 />
@@ -45,8 +45,8 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
               )}
             </div>
             <div className="flex flex-col  items-center justify-center">
-              <h1 className="text-xl font-semibold">{userDetails.username}</h1>
-              <h3 className="text-center my-2">{userDetails.bio}</h3>
+              <h1 className="text-xl font-semibold">{userDetails?.username}</h1>
+              <h3 className="text-center my-2">{userDetails?.bio}</h3>
               <h3>{pageDetails.donationCount} Suppoters </h3>
 
               <div className="flex my-3 gap-5">
