@@ -56,8 +56,8 @@ const Pay = ({ pageDetails, recentDonation }) => {
             payment_method: "esewa",
             esewaSecret: "8gBm/:&EnhH.1/q",
             esewaProductCode: "EPAYTEST",
-            name: user?.username || "testpay222",
-            from_user: user?._id || "testpay22dlkd2",
+            name: user?.username,
+            from_user: user?._id,
             to_page: pageDetails?._id,
           }),
           headers: {
