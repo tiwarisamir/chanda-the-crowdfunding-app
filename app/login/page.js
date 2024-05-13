@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Context } from "@/store/store";
 
 const Login = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const email = useRef();
   const password = useRef();
   const { isAuth, login } = useContext(Context);
