@@ -148,9 +148,8 @@ const ContextProvider = ({ children }) => {
           setpaymentDetails(data?.paymentDetails);
         }
       };
-      if (session) {
-        fetchProfile();
-      }
+
+      fetchProfile();
     } catch (err) {
       console.log(err);
       setuser({});
