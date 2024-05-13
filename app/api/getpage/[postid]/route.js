@@ -17,11 +17,10 @@ export async function GET(req, res) {
     console.log("yo pageid ho page ko :", id);
 
     const pageDetail = await donationPage.find({ _id: id });
+    const organiser = await User.find({ _id: pageDetail.user });
+    const pay = await Payment.find({ to_page: id, done: true });
 
     if (pageDetail) {
-      const organiser = await User.find({ _id: pageDetail.user });
-      const pay = await Payment.find({ to_page: id, done: true });
-
       return NextResponse.json({
         success: true,
         organiser: organiser,

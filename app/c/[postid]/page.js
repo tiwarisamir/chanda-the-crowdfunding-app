@@ -25,7 +25,7 @@ const Profile = ({ params }) => {
         setuserDetails(data.organiser);
         setrecentDonation(data.recentDonation);
 
-        console.log("response  in postid: ", response);
+        // console.log("response  in postid: ", response);
         console.log("response data in postid: ", data);
 
         setisLoading(false);
@@ -50,18 +50,20 @@ const Profile = ({ params }) => {
 
   return (
     <div className="relative">
-      {pageDetails?.pageType === "CREATOR" ? (
+      {pageDetails && pageDetails?.pageType === "CREATOR" ? (
         <CreatorPage
           userDetails={userDetails}
           pageDetails={pageDetails}
           recentDonation={recentDonation}
         />
-      ) : (
+      ) : pageDetails && pageDetails?.pageType === "CHARITY" ? (
         <CharityPage
           userDetails={userDetails}
           pageDetails={pageDetails}
           recentDonation={recentDonation}
         />
+      ) : (
+        <p>No page to show</p>
       )}
     </div>
   );
