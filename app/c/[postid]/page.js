@@ -22,7 +22,7 @@ const Profile = ({ params }) => {
       const fetchProfile = async () => {
         // setisLoading(true);
         const id = params.postid;
-        const response = await fetch(`/api/getpage/id?=${id}`);
+        const response = await fetch(`/api/getpage/id?id=${id}`);
         data = await response.json();
         setPageDetails(data.pageDetails);
         setuserDetails(data.organiser);
