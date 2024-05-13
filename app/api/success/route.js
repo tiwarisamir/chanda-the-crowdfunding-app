@@ -8,7 +8,7 @@ export async function GET(req, res) {
   try {
     // console.log("yo query ho in success url :", req.query);
     const parsedUrl = parse(req.url, true);
-    const { data } = parsedUrl.query;
+    const { data } = parsedUrl.data;
     // const id = await req.url.split("=")[1];
     // const { data } = req.query;
 
