@@ -21,10 +21,10 @@ export async function GET(req, res) {
 
     return NextResponse.json({
       success: false,
-      message: "page not found",
+      message: "post not found",
     });
   } catch (err) {
-    console.log("error aayo: ", err);
+    console.log("error aayo in getPost route: ", err);
     return NextResponse.json({
       success: false,
       error: err,

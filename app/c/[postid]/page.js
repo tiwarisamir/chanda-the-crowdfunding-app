@@ -12,28 +12,25 @@ const Profile = ({ params }) => {
   const [recentDonation, setrecentDonation] = useState([]);
   const [isLoading, setisLoading] = useState(true);
 
-  const [userId, setuserId] = useState("");
-
   const router = useRouter();
-  let data;
 
   useEffect(() => {
     try {
       const fetchProfile = async () => {
         // setisLoading(true);
-        const id = params.postid;
+        const id = await params.postid;
         const response = await fetch(`/api/getpage/id?id=${id}`);
-        data = await response.json();
+        const data = await response.json();
         setPageDetails(data.pageDetails);
         setuserDetails(data.organiser);
         setrecentDonation(data.recentDonation);
 
         console.log("response  in postid: ", response);
         console.log("response data in postid: ", data);
+
         setisLoading(false);
       };
 
-      setuserId(session?.user?.id);
       fetchProfile();
       // console.log("yo session ho : ", userId);
     } catch (err) {

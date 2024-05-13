@@ -108,23 +108,17 @@ const Posts = ({ pageDetails }) => {
     try {
       const fetchPost = async () => {
         setisLoading(true);
-        const res = await fetch(`/api/getpost/id?id=${pageDetails?._id}`, {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-          },
-        });
+        const res = await fetch(`/api/getpost/id?id=${pageDetails?._id}`);
         const data = await res.json();
         if (data.success) {
           setposts(data.postDetails);
-
-          setisLoading(false);
         }
+        setisLoading(false);
       };
 
       fetchPost();
     } catch (err) {
-      console.log(err);
+      console.log("error in posts component 2kxs", err);
     }
   }, [refresh]);
 
