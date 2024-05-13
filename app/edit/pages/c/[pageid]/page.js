@@ -58,7 +58,7 @@ const Creator = ({ params }) => {
                 change only filed that needs to be changed
               </h1>
 
-              <div className="relative w-full flex justify-center mb-3">
+              <div className="relative w-full flex justify-center mb-2">
                 <SingleImageDropzone
                   className="w-full"
                   width={100}
@@ -71,7 +71,7 @@ const Creator = ({ params }) => {
                 />
               </div>
 
-              <div className="relative w-full mb-3">
+              <div className="relative w-full mb-2">
                 <input
                   ref={title}
                   type="text"
@@ -81,8 +81,15 @@ const Creator = ({ params }) => {
               </div>
 
               <div>
-                <span className="text-xs m-1">esewa payment integration</span>
-                <div className="relative w-full mb-3">
+                <div className="mb-2">
+                  <span className="text-lg cursor-pointer font-semibold border-b-2 border-white m-2 ">
+                    Esewa
+                  </span>
+                  <span className="text-lg font-semibold text-slate-500 ">
+                    Khalti
+                  </span>
+                </div>
+                <div className="relative w-full mb-2">
                   <input
                     ref={esewaProductCode}
                     type="text"
@@ -90,7 +97,7 @@ const Creator = ({ params }) => {
                     placeholder="New esewa product code"
                   />
                 </div>
-                <div className="relative w-full mb-3">
+                <div className="relative w-full mb-2">
                   <input
                     ref={esewaSecret}
                     type="text"
@@ -100,7 +107,7 @@ const Creator = ({ params }) => {
                 </div>
               </div>
 
-              <div className="text-center flex gap-5 justify-center items-center mt-6">
+              <div className="text-center flex gap-5 justify-center items-center mt-3">
                 <button
                   type="submit"
                   className=" bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-5 py-2.5 text-center  mb-2 w-full"

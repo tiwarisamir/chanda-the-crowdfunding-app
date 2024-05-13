@@ -169,7 +169,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
                 value="khalti"
                 checked={selectedMethod === "khalti"}
                 onChange={handleMethodChange}
-                className="sr-only"
+                className="sr-only hidden"
               />
               <img
                 src="https://cdn.nayathegana.com/cloudfront-cdn/jamara/web19/images/khalti-logo.svg"

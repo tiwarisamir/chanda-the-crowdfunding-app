@@ -105,7 +105,14 @@ const Charity = () => {
                 />
               </div>
               <div>
-                <span className="text-xs m-1">esewa payment integration</span>
+                <div className="mb-2">
+                  <span className="text-lg cursor-pointer font-semibold border-b-2 border-white m-2 ">
+                    Esewa
+                  </span>
+                  <span className="text-lg font-semibold text-slate-500 ">
+                    Khalti
+                  </span>
+                </div>
                 <div className="relative w-full mb-3">
                   <input
                     ref={esewaProductCode}

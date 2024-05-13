@@ -18,11 +18,11 @@ const Creator = () => {
   const router = useRouter();
   const { edgestore } = useEdgeStore();
 
-  useEffect(() => {
-    if (!session && status !== "loading") {
-      router.push("/");
-    }
-  }, [session, status, router]);
+  // useEffect(() => {
+  //   if (!session && status !== "loading") {
+  //     router.push("/");
+  //   }
+  // }, [session, status, router]);
 
   const handelCreate = async (e) => {
     e.preventDefault();
@@ -59,12 +59,12 @@ const Creator = () => {
     <div className="  flex justify-center items-center">
       <div className="w-full md:w-4/12 px-4 mt-5 mx-auto ">
         <div className="relative glass p-5 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
-          <div className="flex-auto px-6  py-2">
+          <div className="flex-auto px-4  py-1">
             <form>
-              <div className="relative w-full flex justify-center mb-3">
+              <div className="relative w-full flex justify-center mb-2">
                 <SingleImageDropzone
                   className="w-full"
-                  width={100}
+                  width={300}
                   height={100}
                   value={file}
                   // dropzoneOptions={{ maxSize: 1024 * 1024 * 1 }}
@@ -74,7 +74,7 @@ const Creator = () => {
                 />
               </div>
 
-              <div className="relative w-full mb-3">
+              <div className="relative w-full mb-2">
                 <input
                   ref={title}
                   type="text"
@@ -84,7 +84,14 @@ const Creator = () => {
               </div>
 
               <div>
-                <span className="text-xs m-1">esewa payment integration</span>
+                <div className="mb-2">
+                  <span className="text-lg cursor-pointer font-semibold border-b-2 border-white m-2 ">
+                    Esewa
+                  </span>
+                  <span className="text-lg font-semibold text-slate-500 ">
+                    Khalti
+                  </span>
+                </div>
                 <div className="relative w-full mb-3">
                   <input
                     ref={esewaProductCode}
@@ -103,7 +110,7 @@ const Creator = () => {
                 </div>
               </div>
 
-              <div className="text-center flex gap-3 mt-6">
+              <div className="text-center flex gap-3 mt-3">
                 <button
                   type="submit"
                   className=" bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-xl px-5 py-2.5 text-center me-2 mb-2 w-full"
