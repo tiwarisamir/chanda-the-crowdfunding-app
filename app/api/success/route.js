@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { NextResponse } from "next/server";
 import { createSignature } from "../handlepay/route";
 import Payment from "@/models/Payment";
@@ -5,25 +6,23 @@ import connectDB from "@/db/connectDB";
 import donationPage from "@/models/donationPage";
 import { parse } from "url";
 
-// Optional: Data fetching/validation in getServerSideProps
-export async function getServerSideProps(context) {
-  const { req } = context; // Access the request object
-  const parsedUrl = parse(req.url, true);
-  const data = parsedUrl.query.data;
-
-  // Optionally perform any data fetching or validation here based on the query parameter (data)
-
-  return {
-    props: { data }, // Pass the data to the API route component
-  };
-}
-
-export default async function handler({ data }) {
-  // Receive data from getServerSideProps (optional)
+export async function GET(req, res) {
   try {
-    const decodeData = JSON.parse(
-      Buffer.from(data, "base64").toString("utf-8")
-    );
+    // console.log("yo query ho in success url :", req.query);
+    // const parsedUrl = parse(req.url, true);
+    // console.log("yo req ho", req);
+    // console.log("yo req.query ho", req.query);
+    // console.log("yo req.url ho", req.url);
+    // const data = parsedUrl.query.data;
+    // console.log("yo data ho", data);
+    const id = await req.url.split("=")[1];
+    // const { data } = req.query;
+
+    // const parsedUrl = parse(req.url, true);
+    // const data = parsedUrl.query.data;
+
+    const decodeData = JSON.parse(Buffer.from(id, "base64").toString("utf-8"));
+    // console.log("yo decoded data ho :", decodeData);
 
     const message = decodeData.signed_field_names
       .split(",")
@@ -44,7 +43,6 @@ export default async function handler({ data }) {
         message: "integrity error",
       });
     }
-
     donation.raisedAmount =
       Number(donation.raisedAmount) + Number(decodeData.total_amount);
     donation.donationCount = Number(donation.donationCount) + 1;
