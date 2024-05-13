@@ -12,7 +12,7 @@ const Discover = () => {
         const res = await fetch(`/api/gethome`);
         const data = await res.json();
         if (data.success) {
-          console.log("data aayo :", data);
+          // console.log("data aayo :", data);
           setpageDetails(data.pageDetails);
           setisLoading(false);
         }

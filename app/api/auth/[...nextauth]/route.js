@@ -70,8 +70,7 @@ export const authoptions = NextAuth({
         session.user.name = dbUser?.username;
         return session;
       } else {
-        const res = "user not found";
-        return res;
+        return null;
       }
     },
     async jwt({ token, account, profile }) {

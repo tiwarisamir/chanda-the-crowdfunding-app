@@ -135,7 +135,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     try {
       const fetchProfile = async () => {
-        const res = await fetch(`/api/getprofile`, {
+        const res = await fetch(`/api/getprofile?id=${session.user.id}`, {
           method: "GET",
           headers: {
             "content-type": "application/json",

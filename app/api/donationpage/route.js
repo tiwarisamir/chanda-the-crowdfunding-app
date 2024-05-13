@@ -8,9 +8,9 @@ export async function POST(req, res) {
     const data = await req.json();
     const newPage = new donationPage({
       title: data.title,
-      description: data.description,
+      description: data?.description,
       coverImage: data.coverImage,
-      targetAmount: data.targetAmount,
+      targetAmount: data?.targetAmount,
       esewaProductCode: data.esewaProductCode,
       esewaSecret: data.esewaSecret,
       pageType: data.pageType,

@@ -6,9 +6,7 @@ export async function GET(req, res) {
   try {
     await connectDB();
 
-    // console.log("yo req ho Post  ko :", req);
     const id = await req.url.split("=")[1];
-    // console.log("yo pageid ho page ko in getpost :", id);
 
     const postDetail = await Post.find({ page: id });
 
