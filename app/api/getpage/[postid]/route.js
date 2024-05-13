@@ -10,8 +10,8 @@ export async function GET(req, res) {
 
     const id = await req.url.split("=")[1];
 
-    const pageDetail = await donationPage.findOne({ _id: id });
-    const organiser = await User.findOne({ _id: pageDetail.user });
+    const pageDetail = await donationPage.find(id);
+    const organiser = await User.find(pageDetail.user);
     const pay = await Payment.find({ to_page: id, done: true });
 
     if (pageDetail) {
@@ -25,7 +25,7 @@ export async function GET(req, res) {
 
     return NextResponse.json({
       success: false,
-      message: "User not found",
+      message: "Page not found",
     });
   } catch (err) {
     console.log("error aayo: ", err);
