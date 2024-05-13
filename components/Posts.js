@@ -108,7 +108,7 @@ const Posts = ({ pageDetails }) => {
     try {
       const fetchPost = async () => {
         setisLoading(true);
-        const res = await fetch(`/api/getpost/id?=${pageDetails._id}`, {
+        const res = await fetch(`/api/getpost/id?=${pageDetails?._id}`, {
           method: "GET",
           headers: {
             "content-type": "application/json",
@@ -175,11 +175,12 @@ const Posts = ({ pageDetails }) => {
                   </button> */}
                   </div>
 
-                  {showDropdowns[item._id] && (
+                  {showDropdowns[item?._id] && (
                     <div className="w-full   mt-2 ">
                       <div className="w-full flex flex-col gap-2 min-h-[2rem] rounded-lg bg-slate-800 p-5">
-                        {comments[item._id] && comments[item._id].length > 0 ? (
-                          comments[item._id].map((item) => {
+                        {comments[item?._id] &&
+                        comments[item?._id].length > 0 ? (
+                          comments[item?._id].map((item) => {
                             return (
                               <div key={item?._id}>
                                 <div className="flex gap-2 items-center">

@@ -112,7 +112,7 @@ const ContextProvider = ({ children }) => {
           username: username,
           profilepic: profilepic,
           bio: bio,
-          id: user._id,
+          id: user?._id,
         }),
         headers: {
           "content-type": "application/json",
@@ -143,9 +143,9 @@ const ContextProvider = ({ children }) => {
         });
         const data = await res.json();
         if (data.success) {
-          setuser(data.user);
-          setpageDetails(data.pageDetails);
-          setpaymentDetails(data.paymentDetails);
+          setuser(data?.user);
+          setpageDetails(data?.pageDetails);
+          setpaymentDetails(data?.paymentDetails);
         }
       };
 

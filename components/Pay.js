@@ -58,7 +58,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
               esewaProductCode: "EPAYTEST",
               name: user?.username,
               from_user: user?._id,
-              to_page: pageDetails._id,
+              to_page: pageDetails?._id,
             }),
             headers: {
               "content-type": "application/json",
