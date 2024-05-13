@@ -29,10 +29,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (session) {
+    if (!session && status !== "loading") {
       router.push("/");
     }
-  }, [session]);
+  }, [session, status, router]);
 
   return (
     <div className="min-h-[80.7vh] flex justify-center items-center">

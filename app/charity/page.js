@@ -22,11 +22,11 @@ const Charity = () => {
 
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (!session && status !== "loading") {
-  //     router.push("/");
-  //   }
-  // }, [session, status, router]);
+  useEffect(() => {
+    if (!session && status !== "loading") {
+      router.push("/");
+    }
+  }, [session, status, router]);
 
   const handelCreate = async (e) => {
     e.preventDefault();
