@@ -27,7 +27,7 @@ export async function GET(req, res) {
       message: "page not found",
     });
   } catch (err) {
-    console.log("error aayo: ", err);
+    // console.log("error aayo: ", err);
     return NextResponse.json({
       success: false,
       error: err,

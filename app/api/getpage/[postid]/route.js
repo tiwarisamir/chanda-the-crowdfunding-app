@@ -40,7 +40,7 @@ export async function GET(req, res) {
       message: "Page not found",
     });
   } catch (err) {
-    console.log("error aayo: ", err);
+    // console.log("error aayo: ", err);
     return NextResponse.json({
       success: false,
       message: "error in fetshing page 2ks",

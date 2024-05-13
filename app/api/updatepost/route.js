@@ -29,7 +29,7 @@ export async function PUT(req, res) {
       message: "Post updated successfully",
     });
   } catch (err) {
-    console.log("error aayo: ", err);
+    // console.log("error aayo: ", err);
     return NextResponse.json({
       success: false,
       message: "something went wrong",

@@ -55,7 +55,8 @@ const ContextProvider = ({ children }) => {
       setrefresh(!refresh);
     } catch (error) {
       // toast.error(error.response.data.message);
-      console.log(error);
+      // console.log(error);
+      throw new Error(error);
     }
   };
 
@@ -90,7 +91,8 @@ const ContextProvider = ({ children }) => {
         setrefresh(!refresh);
       }
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
+      // console.log(err);
     }
   };
 
@@ -146,8 +148,9 @@ const ContextProvider = ({ children }) => {
 
       fetchProfile();
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setuser({});
+      throw new Error(err);
     }
   }, [refresh]);
 

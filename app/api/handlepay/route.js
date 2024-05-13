@@ -65,7 +65,7 @@ export async function POST(req, res) {
       return NextResponse.json(responseData);
     }
   } catch (err) {
-    console.log("error in handlePay: ", err);
+    // console.log("error in handlePay: ", err);
     return NextResponse.json({
       error: err?.message || "Something went wrong",
     });

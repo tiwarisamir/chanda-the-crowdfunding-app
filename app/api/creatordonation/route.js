@@ -22,7 +22,7 @@ export async function POST(req, res) {
       message: "Page created successfully",
     });
   } catch (err) {
-    console.log("error aayo: ", err);
+    // console.log("error aayo: ", err);
     return NextResponse.json({
       success: false,
       message: "something went wrong",

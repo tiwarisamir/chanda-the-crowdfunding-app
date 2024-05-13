@@ -34,7 +34,8 @@ const Posts = ({ pageDetails }) => {
 
       fetchComment();
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
+      // console.log(err);
     }
   };
 
@@ -118,7 +119,8 @@ const Posts = ({ pageDetails }) => {
 
       fetchPost();
     } catch (err) {
-      console.log("error in posts component 2kxs", err);
+      throw new Error(err);
+      // console.log("error in posts component 2kxs", err);
     }
   }, [refresh]);
 

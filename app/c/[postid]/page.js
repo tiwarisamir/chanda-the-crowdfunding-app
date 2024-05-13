@@ -36,7 +36,8 @@ const Profile = ({ params }) => {
       fetchProfile();
       // console.log("yo session ho : ", userId);
     } catch (err) {
-      console.log("Error :", err);
+      throw new Error(err);
+      // console.log("Error :", err);
     }
   }, []);
 

@@ -71,10 +71,11 @@ const Pay = ({ pageDetails, recentDonation }) => {
 
           esewaCall(responseData.formData);
         } else {
-          console.log("Oops! Something is wrong.");
+          toast.error("Oops! Something is wrong.");
         }
       } catch (error) {
-        console.log("Error: ", error);
+        throw new Error(err);
+        // console.log("Error: ", error);
       }
     } else {
       toast.error("Fill the form first!");

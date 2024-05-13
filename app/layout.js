@@ -12,14 +12,14 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Chanda | Crowdfunding and Fundrasing Platform",
   description: "this website is a Crowdfunding and Fundrasing Platform",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" type="image/png" href="/icon.png" />
-      </head>
       <body className={inter.className}>
         <SessionWrapper>
           <EdgeStoreProvider>

@@ -22,7 +22,7 @@ export async function GET(req, res) {
       message: "post not found",
     });
   } catch (err) {
-    console.log("error aayo in getPost route: ", err);
+    // console.log("error aayo in getPost route: ", err);
     return NextResponse.json({
       success: false,
       error: err,

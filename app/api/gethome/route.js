@@ -19,7 +19,7 @@ export async function GET(req, res) {
       message: "No page to show",
     });
   } catch (err) {
-    console.log("error aayo: ", err);
+    // console.log("error aayo: ", err);
     return NextResponse.json({
       success: false,
       error: err,

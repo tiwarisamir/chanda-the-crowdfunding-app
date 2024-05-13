@@ -44,7 +44,7 @@ export async function GET(req, res) {
       `${process.env.NEXTAUTH_URL}/c/${paymentData.to_page}`
     );
   } catch (err) {
-    console.log("error in success: ", err);
+    // console.log("error in success: ", err);
     return NextResponse.json({
       error: err || "Something went wrong",
     });

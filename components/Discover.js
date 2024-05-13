@@ -20,7 +20,8 @@ const Discover = () => {
 
       fetchProfile();
     } catch (err) {
-      console.log("Error: ", err);
+      throw new Error(err);
+      // console.log("Error: ", err);
     }
   }, []);
 
