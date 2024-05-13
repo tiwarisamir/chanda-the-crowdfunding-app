@@ -105,13 +105,16 @@ const Charity = () => {
                 />
               </div>
               <div>
-                <div className="mb-2">
+                <div className="relative mb-2">
                   <span className="text-lg cursor-pointer font-semibold border-b-2 border-white m-2 ">
                     Esewa
                   </span>
                   <span className="text-lg font-semibold text-slate-500 ">
                     Khalti
                   </span>
+                  <div className="absolute z-10 right-5 top-0 text-red-500">
+                    <span>fill dummy data for now</span>
+                  </div>
                 </div>
                 <div className="relative w-full mb-3">
                   <input

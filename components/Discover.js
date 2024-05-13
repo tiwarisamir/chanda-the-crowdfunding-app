@@ -27,7 +27,7 @@ const Discover = () => {
 
   return (
     <div className=" flex  justify-center  items-center flex-wrap gap-2">
-      {pageDetails && pageDetails.length > 0 ? (
+      {pageDetails.length > 0 ? (
         pageDetails.map((item) => {
           return (
             <Link key={item._id} href={`/c/${item._id}`}>

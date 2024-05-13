@@ -141,7 +141,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
             placeholder="Enter Amount"
           />
 
-          <div className="flex my-3 items-center gap-5">
+          <div className="flex my-3 relative items-center gap-5">
             {/* Radio input for eSewa */}
             <label
               className={`relative flex items-center justify-center w-20 h-20 p-2 rounded-lg bg-slate-800  cursor-pointer ${
@@ -159,7 +159,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
             </label>
 
             {/* Radio input for Khalti */}
-            <label
+            {/* <label
               className={`relative flex items-center justify-center w-20 h-20 p-2 rounded-lg bg-slate-800 cursor-pointer ${
                 selectedMethod === "khalti" ? "border border-blue-500" : ""
               }`}
@@ -169,14 +169,24 @@ const Pay = ({ pageDetails, recentDonation }) => {
                 value="khalti"
                 checked={selectedMethod === "khalti"}
                 onChange={handleMethodChange}
-                className="sr-only hidden"
+                className="sr-only "
               />
               <img
                 src="https://cdn.nayathegana.com/cloudfront-cdn/jamara/web19/images/khalti-logo.svg"
                 alt="khalti"
                 className="w-24 object-cover"
               />
-            </label>
+            </label> */}
+
+            <div className="absolute text-sm bg-red-500 p-1 rounded-md right-0">
+              <span>For payment use this credentials</span>
+              <ul>
+                <li>eSewa ID: 9806800001</li>
+                <li>Password: Nepal@123</li>
+                <li>MPIN: 1122</li>
+                <li>Token:123456</li>
+              </ul>
+            </div>
           </div>
           <button
             onClick={handelPay}

@@ -139,7 +139,7 @@ const Dashboard = () => {
                   key={item._id}
                   className="w-full h-[4rem] flex    justify-between items-center border-b px-3 py-2"
                 >
-                  <div className="flex gap-5 w-2/5">
+                  <div className="flex gap-5 justify-center items-center w-2/5">
                     <div className="bg-slate-500 rounded overflow-hidden w-16 h-10">
                       <img
                         src={`${item.coverImage}`}

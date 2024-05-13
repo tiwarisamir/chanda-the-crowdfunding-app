@@ -2,25 +2,8 @@
 import Discover from "@/components/Discover";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 
-export default function Home({ searchParams }) {
-  const ScrollToPositionOnReload = () => {
-    const handleClick = () => {
-      // Save current scroll position to sessionStorage when link is clicked
-      sessionStorage.setItem("scrollPosition", window.scrollY.toString());
-    };
-  };
-
-  useEffect(() => {
-    // Retrieve and scroll to the stored position on page load
-    const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition, 10));
-      sessionStorage.removeItem("scrollPosition"); // Clear stored position after using it
-    }
-  }, []);
-
+export default function Home() {
   return (
     <div className="w-full">
       <div className="flex justify-center items-center flex-col text-center  h-[90vh] p-5 w-3/4 mx-auto gap-10  ">

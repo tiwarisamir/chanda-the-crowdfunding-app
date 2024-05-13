@@ -64,7 +64,7 @@ const Creator = () => {
               <div className="relative w-full flex justify-center mb-2">
                 <SingleImageDropzone
                   className="w-full"
-                  width={300}
+                  width={100}
                   height={100}
                   value={file}
                   // dropzoneOptions={{ maxSize: 1024 * 1024 * 1 }}
@@ -84,13 +84,16 @@ const Creator = () => {
               </div>
 
               <div>
-                <div className="mb-2">
+                <div className="relative mb-2">
                   <span className="text-lg cursor-pointer font-semibold border-b-2 border-white m-2 ">
                     Esewa
                   </span>
                   <span className="text-lg font-semibold text-slate-500 ">
                     Khalti
                   </span>
+                  <div className="absolute z-10 right-5 top-0 text-red-500">
+                    <span>fill dummy data for now</span>
+                  </div>
                 </div>
                 <div className="relative w-full mb-3">
                   <input
