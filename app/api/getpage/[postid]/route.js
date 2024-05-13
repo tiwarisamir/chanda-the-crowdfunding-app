@@ -31,6 +31,7 @@ export async function GET(req, res) {
     console.log("error aayo: ", err);
     return NextResponse.json({
       success: false,
+      message: "error in fetshing post 2ks",
       error: err,
     });
   }

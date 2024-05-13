@@ -28,7 +28,8 @@ const Profile = ({ params }) => {
         setuserDetails(data.organiser);
         setrecentDonation(data.recentDonation);
 
-        console.log("response in postid: ", data);
+        console.log("response  in postid: ", response);
+        console.log("response data in postid: ", data);
         setisLoading(false);
       };
 
