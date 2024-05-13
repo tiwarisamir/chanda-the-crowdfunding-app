@@ -9,10 +9,9 @@ import connectDB from "@/db/connectDB";
 export async function GET(req, res) {
   try {
     await connectDB();
-    const id = await req.url.split("=")[1];
-    // const session = await getServerSession(authoptions);
+    const session = await getServerSession(authoptions);
 
-    const currentUser = await User.findById(id);
+    const currentUser = await User.findOne({ email: session?.user?.email });
     const pageDetail = await donationPage.find({ user: currentUser?._id });
     const paymentDetails = await Payment.find({
       from_user: currentUser?._id,
