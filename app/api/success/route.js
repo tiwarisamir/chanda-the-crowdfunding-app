@@ -1,3 +1,4 @@
+"use server";
 import { NextResponse } from "next/server";
 import { createSignature } from "../handlepay/route";
 import Payment from "@/models/Payment";
