@@ -14,20 +14,20 @@ export async function GET(req, res) {
     // console.log("yo sano url ho page ko :", req.url);
     // console.log("yo thulo URL ho page ko :", req.URL);
     const id = await req.url.split("=")[1];
-    console.log("yo pageid ho page ko :", id);
+    // console.log("yo pageid ho page ko :", id);
 
-    // const pageDetail = await donationPage.find(id);
-    // const organiser = await User.find(pageDetail.user);
-    // const pay = await Payment.find({ to_page: id, done: true });
+    const pageDetail = await donationPage.find(id);
+    const organiser = await User.find(pageDetail.user);
+    const pay = await Payment.find({ to_page: id, done: true });
 
-    // if (pageDetail) {
-    //   return NextResponse.json({
-    //     success: true,
-    //     organiser: organiser,
-    //     pageDetails: pageDetail,
-    //     recentDonation: pay,
-    //   });
-    // }
+    if (pageDetail) {
+      return NextResponse.json({
+        success: true,
+        organiser: organiser,
+        pageDetails: pageDetail,
+        recentDonation: pay,
+      });
+    }
 
     return NextResponse.json({
       success: false,
