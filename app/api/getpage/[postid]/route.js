@@ -9,6 +9,7 @@ export async function GET(req, res) {
     await connectDB();
 
     const id = await req.url.split("=")[1];
+    console.log("yo id ho page ko :", id);
 
     const pageDetail = await donationPage.find(id);
     const organiser = await User.find(pageDetail.user);
