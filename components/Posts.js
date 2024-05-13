@@ -104,23 +104,22 @@ const Posts = ({ pageDetails }) => {
     }
   };
 
-  console.log("/******************************************* ");
-  console.log("pageDetails in usestate data in postid: ", pageDetails);
+  // console.log("/******************************************* ");
+  // console.log("pageDetails in usestate data in postid: ", pageDetails);
 
   useEffect(() => {
     try {
       const fetchPost = async () => {
         setisLoading(true);
-        if (pageDetails && pageDetails.length > 0) {
-          console.log("yo post ma page id ho:", pageDetails?._id);
-          const res = await fetch(`/api/getpost/id?id=${pageDetails?._id}`);
-          const data = await res.json();
-          if (data.success) {
-            setposts(data.postDetails);
-          }
+
+        console.log("yo post ma page id ho:", pageDetails?._id);
+        const res = await fetch(`/api/getpost/id?id=${pageDetails?._id}`);
+        const data = await res.json();
+        if (data.success) {
+          setposts(data.postDetails);
         }
-        setisLoading(false);
       };
+      setisLoading(false);
 
       fetchPost();
     } catch (err) {
