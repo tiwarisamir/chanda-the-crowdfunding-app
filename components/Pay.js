@@ -21,67 +21,67 @@ const Pay = ({ pageDetails, recentDonation }) => {
   const handelPay = async (e) => {
     e.preventDefault();
 
-    if (isAuth) {
-      if (
-        amount.current?.value.length !== 0 &&
-        message.current?.value.length !== 0 &&
-        selectedMethod !== 0
-      ) {
-        const esewaCall = (formData) => {
-          // console.log("form ko data in ecewa function: ", formData);
-          var path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
+    // if (isAuth) {
+    if (
+      amount.current?.value.length !== 0 &&
+      message.current?.value.length !== 0 &&
+      selectedMethod !== 0
+    ) {
+      const esewaCall = (formData) => {
+        // console.log("form ko data in ecewa function: ", formData);
+        var path = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
 
-          var form = document.createElement("form");
-          form.setAttribute("method", "POST");
-          form.setAttribute("action", path);
+        var form = document.createElement("form");
+        form.setAttribute("method", "POST");
+        form.setAttribute("action", path);
 
-          for (var key in formData) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", formData[key]);
-            form.appendChild(hiddenField);
-          }
-
-          document.body.appendChild(form);
-          form.submit();
-        };
-
-        try {
-          const res = await fetch("/api/handlepay", {
-            method: "POST",
-            body: JSON.stringify({
-              amount: amount.current?.value,
-              message: message.current?.value,
-              payment_method: "esewa",
-              esewaSecret: "8gBm/:&EnhH.1/q",
-              esewaProductCode: "EPAYTEST",
-              name: user?.username,
-              from_user: user?._id,
-              to_page: pageDetails?._id,
-            }),
-            headers: {
-              "content-type": "application/json",
-            },
-          });
-
-          if (res.ok) {
-            const responseData = await res.json();
-            // console.log("yo res ho with data : ", responseData);
-
-            esewaCall(responseData.formData);
-          } else {
-            console.log("Oops! Something is wrong.");
-          }
-        } catch (error) {
-          console.log("Error: ", error);
+        for (var key in formData) {
+          var hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", key);
+          hiddenField.setAttribute("value", formData[key]);
+          form.appendChild(hiddenField);
         }
-      } else {
-        toast.error("Fill the form first!");
+
+        document.body.appendChild(form);
+        form.submit();
+      };
+
+      try {
+        const res = await fetch("/api/handlepay", {
+          method: "POST",
+          body: JSON.stringify({
+            amount: amount.current?.value,
+            message: message.current?.value,
+            payment_method: "esewa",
+            esewaSecret: "8gBm/:&EnhH.1/q",
+            esewaProductCode: "EPAYTEST",
+            name: user?.username,
+            from_user: user?._id,
+            to_page: pageDetails?._id,
+          }),
+          headers: {
+            "content-type": "application/json",
+          },
+        });
+
+        if (res.ok) {
+          const responseData = await res.json();
+          // console.log("yo res ho with data : ", responseData);
+
+          esewaCall(responseData.formData);
+        } else {
+          console.log("Oops! Something is wrong.");
+        }
+      } catch (error) {
+        console.log("Error: ", error);
       }
     } else {
-      toast.error("Please login first");
+      toast.error("Fill the form first!");
     }
+    // } else {
+    //   toast.error("Please login first");
+    // }
   };
 
   return (
