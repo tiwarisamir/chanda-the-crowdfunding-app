@@ -20,11 +20,11 @@ export async function GET(req, res) {
     const pageDetail = await donationPage.findById(id);
 
     const organiser = await User.findById(pageDetail.user);
-    console.log("yo organiser  ho page ko :", organiser);
+    // console.log("yo organiser  ho page ko :", organiser);
 
     // console.log("/*******************************************22222 ");
     const pay = await Payment.find({ to_page: id, done: true });
-    console.log("yo pay  ho page ko :", pay);
+    // console.log("yo pay  ho page ko :", pay);
 
     if (pageDetail) {
       return NextResponse.json({

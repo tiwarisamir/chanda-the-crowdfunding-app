@@ -6,9 +6,12 @@ import donationPage from "@/models/donationPage";
 
 export async function GET(req, res) {
   try {
-    console.log("yo query ho in success url :", req.query);
-    const id = await req.url.split("=")[1];
-    const decodeData = JSON.parse(Buffer.from(id, "base64").toString("utf-8"));
+    // console.log("yo query ho in success url :", req.query);
+    // const id = await req.url.split("=")[1];
+    const { data } = req.query;
+    const decodeData = JSON.parse(
+      Buffer.from(data, "base64").toString("utf-8")
+    );
     // console.log("yo decoded data ho :", decodeData);
 
     const message = decodeData.signed_field_names
