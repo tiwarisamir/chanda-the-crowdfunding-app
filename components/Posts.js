@@ -21,12 +21,7 @@ const Posts = ({ pageDetails }) => {
     try {
       const fetchComment = async () => {
         setisLoading(true);
-        const res = await fetch(`/api/getcomment/id?=${postId}`, {
-          method: "GET",
-          headers: {
-            "content-type": "application/json",
-          },
-        });
+        const res = await fetch(`/api/getcomment/id?id=${postId}`);
         const data = await res.json();
         if (data.success) {
           setcomments((prevState) => ({
