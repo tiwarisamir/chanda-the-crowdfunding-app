@@ -18,9 +18,9 @@ const CreatePost = ({ params }) => {
 
   const handelCreate = async (e) => {
     e.preventDefault();
-    if (file) {
-      const image = await edgestore.myPublicImage.upload({ file });
-      if (caption.current.value.length > 0) {
+    if (caption.current.value.length > 0) {
+      if (file) {
+        const image = await edgestore.myPublicImage.upload({ file });
         const res = await fetch("/api/createpost", {
           method: "POST",
           body: JSON.stringify({
@@ -39,10 +39,25 @@ const CreatePost = ({ params }) => {
           router.push(`/c/${params.pageid}`);
         }
       } else {
-        toast.error("Please write caption");
+        const res = await fetch("/api/createpost", {
+          method: "POST",
+          body: JSON.stringify({
+            caption: caption.current.value,
+            page: params.pageid,
+          }),
+          headers: {
+            "content-type": "application/json",
+          },
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          toast.success(data.message);
+          router.push(`/c/${params.pageid}`);
+        }
       }
     } else {
-      toast.error("please upload image");
+      toast.error("Please write caption");
     }
   };
   return (
