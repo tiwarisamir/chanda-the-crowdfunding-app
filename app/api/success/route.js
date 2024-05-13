@@ -7,18 +7,16 @@ import donationPage from "@/models/donationPage";
 export async function GET(req, res) {
   try {
     // console.log("yo query ho in success url :", req.query);
-    const parsedUrl = parse(req.url, true);
-    console.log("yo req ho", req);
-    console.log("yo req.query ho", req.query);
-    console.log("yo req.url ho", req.url);
-    const { data } = parsedUrl.data;
-    console.log("yo data ho", data);
-    // const id = await req.url.split("=")[1];
+    // const parsedUrl = parse(req.url, true);
+    // console.log("yo req ho", req);
+    // console.log("yo req.query ho", req.query);
+    // console.log("yo req.url ho", req.url);
+    // const { data } = parsedUrl.data;
+    // console.log("yo data ho", data);
+    const id = await req.url.split("=")[1];
     // const { data } = req.query;
 
-    const decodeData = JSON.parse(
-      Buffer.from(data, "base64").toString("utf-8")
-    );
+    const decodeData = JSON.parse(Buffer.from(id, "base64").toString("utf-8"));
     // console.log("yo decoded data ho :", decodeData);
 
     const message = decodeData.signed_field_names
