@@ -17,10 +17,10 @@ export async function GET(req, res) {
     // console.log("yo pageid ho page ko :", id);
 
     console.log("/*******************************************11111 ");
-    const pageDetail = await donationPage.find({ _id: id });
+    const pageDetail = await donationPage.findById(id);
     console.log("yo pageDetail  ho page ko :", pageDetail);
     console.log("/*******************************************22222 ");
-    const organiser = await User.find({ _id: pageDetail.user });
+    const organiser = await User.findById(pageDetail.user);
     console.log("yo organiser  ho page ko :", organiser);
 
     console.log("/*******************************************22222 ");
