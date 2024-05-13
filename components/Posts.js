@@ -108,7 +108,7 @@ const Posts = ({ pageDetails }) => {
     try {
       const fetchPost = async () => {
         setisLoading(true);
-        const res = await fetch(`/api/getpost/id?=${pageDetails?._id}`, {
+        const res = await fetch(`/api/getpost/id?id=${pageDetails?._id}`, {
           method: "GET",
           headers: {
             "content-type": "application/json",

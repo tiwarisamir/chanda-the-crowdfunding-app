@@ -65,9 +65,14 @@ export const authoptions = NextAuth({
     },
     async session({ session, user, token }) {
       const dbUser = await User.findOne({ email: session?.user?.email });
-      session.user.id = dbUser?._id;
-      session.user.name = dbUser?.username;
-      return session;
+      if (dbUser) {
+        session.user.id = dbUser?._id;
+        session.user.name = dbUser?.username;
+        return session;
+      } else {
+        const res = "user not found";
+        return res;
+      }
     },
     // async jwt({ token, account, profile }) {
     //   const dbUser = await User.findOne({ email: token.email });
