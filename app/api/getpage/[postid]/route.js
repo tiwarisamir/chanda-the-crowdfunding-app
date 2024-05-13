@@ -16,8 +16,8 @@ export async function GET(req, res) {
     const id = await req.url.split("=")[1];
     console.log("yo pageid ho page ko :", id);
 
-    const pageDetail = await donationPage.find(id);
-    const organiser = await User.find(pageDetail.user);
+    const pageDetail = await donationPage.find({ _id: id });
+    const organiser = await User.find({ _id: pageDetail.user });
     const pay = await Payment.find({ to_page: id, done: true });
 
     if (pageDetail) {
