@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Context } from "@/store/store";
 
 const Login = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const email = useRef();
   const password = useRef();
   const { isAuth, login } = useContext(Context);
@@ -29,10 +29,10 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (!session && status !== "loading") {
+    if (isAuth) {
       router.push("/");
     }
-  }, [session, status, router]);
+  }, [isAuth]);
 
   return (
     <div className="min-h-[80.7vh] flex justify-center items-center">
