@@ -104,6 +104,9 @@ const Posts = ({ pageDetails }) => {
     }
   };
 
+  console.log("/******************************************* ");
+  console.log("pageDetails in usestate data in postid: ", pageDetails);
+
   useEffect(() => {
     try {
       const fetchPost = async () => {

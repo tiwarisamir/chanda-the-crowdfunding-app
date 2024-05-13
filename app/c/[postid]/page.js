@@ -52,7 +52,7 @@ const Profile = ({ params }) => {
 
   return (
     <div className="relative">
-      {pageDetails && pageDetails?.pageType === "CREATOR" ? (
+      {pageDetails?.pageType === "CREATOR" ? (
         <CreatorPage
           userDetails={userDetails}
           pageDetails={pageDetails}
