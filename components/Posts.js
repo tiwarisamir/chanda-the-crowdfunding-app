@@ -118,8 +118,8 @@ const Posts = ({ pageDetails }) => {
         if (data.success) {
           setposts(data.postDetails);
         }
+        setisLoading(false);
       };
-      setisLoading(false);
 
       fetchPost();
     } catch (err) {
