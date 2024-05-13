@@ -74,15 +74,15 @@ export const authoptions = NextAuth({
         return res;
       }
     },
-    // async jwt({ token, account, profile }) {
-    //   const dbUser = await User.findOne({ email: token.email });
+    async jwt({ token, account, profile }) {
+      const dbUser = await User.findOne({ email: token.email });
 
-    //   if (account) {
-    //     token.accessToken = account.access_token;
-    //     token.id = dbUser?._id;
-    //   }
-    //   return token;
-    // },
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = dbUser?._id;
+      }
+      return token;
+    },
   },
 });
 
