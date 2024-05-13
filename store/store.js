@@ -46,7 +46,7 @@ const ContextProvider = ({ children }) => {
         }
       } else if (loginType === "google") {
         signIn("google");
-        toast.success("login successfully");
+        // toast.success("login successfully");
       } else if (loginType === "github") {
         signIn("github");
         toast.success("login successfully");
