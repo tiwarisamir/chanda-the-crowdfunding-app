@@ -27,6 +27,8 @@ const Profile = ({ params }) => {
 
         // console.log("response  in postid: ", response);
         console.log("response data in postid: ", data);
+        console.log("/******************************************* ");
+        console.log("pageDetails in usestate data in postid: ", pageDetails);
 
         setisLoading(false);
       };
