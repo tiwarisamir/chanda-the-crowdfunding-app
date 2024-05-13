@@ -108,10 +108,13 @@ const Posts = ({ pageDetails }) => {
     try {
       const fetchPost = async () => {
         setisLoading(true);
-        const res = await fetch(`/api/getpost/id?id=${pageDetails?._id}`);
-        const data = await res.json();
-        if (data.success) {
-          setposts(data.postDetails);
+        if (pageDetails && pageDetails.length > 0) {
+          console.log("yo post ma page id ho:", pageDetails?._id);
+          const res = await fetch(`/api/getpost/id?id=${pageDetails?._id}`);
+          const data = await res.json();
+          if (data.success) {
+            setposts(data.postDetails);
+          }
         }
         setisLoading(false);
       };
