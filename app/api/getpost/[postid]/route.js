@@ -10,14 +10,14 @@ export async function GET(req, res) {
     const id = await req.url.split("=")[1];
     console.log("yo pageid ho page ko in getpost :", id);
 
-    // const postDetail = await Post.find({ page: id });
+    const postDetail = await Post.find({ page: id });
 
-    // if (postDetail) {
-    //   return NextResponse.json({
-    //     success: true,
-    //     postDetails: postDetail,
-    //   });
-    // }
+    if (postDetail) {
+      return NextResponse.json({
+        success: true,
+        postDetails: postDetail,
+      });
+    }
 
     return NextResponse.json({
       success: false,
