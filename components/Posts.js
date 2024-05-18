@@ -125,8 +125,8 @@ const Posts = ({ pageDetails }) => {
   }, [refresh]);
 
   return (
-    <div className="flex  justify-center items-center ">
-      <div className="flex  flex-col  gap-2 items-center">
+    <div className="flex w-full  justify-center items-center ">
+      <div className="flex  w-3/6  flex-col  gap-2 items-center">
         <div className="w-full flex ">
           <h1 className=" text-2xl w-full  font-bold ">Recent posts </h1>
 
@@ -136,7 +136,7 @@ const Posts = ({ pageDetails }) => {
             </Link>
           )}
         </div>
-        <div className=" flex flex-col gap-3 w-[40rem]  rounded-lg">
+        <div className=" flex flex-col gap-3 w-full rounded-lg">
           {posts && posts.length > 0 ? (
             posts.map((item) => {
               return (

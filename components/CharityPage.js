@@ -16,7 +16,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
     <>
       <div className="w-full flex flex-col items-center  ">
         <div className=" flex gap-5 w-[80%]  my-5">
-          <div className="flex flex-col gap-2 w-3/4 items-center justify-center bg-slate-900 p-4 rounded-lg">
+          <div className="flex flex-col gap-2 w-full items-center justify-center bg-slate-900 p-4 rounded-lg">
             <div className="w-full flex  ">
               <h1 className="text-2xl bg  font-bold w-full ">
                 {pageDetails.title}
@@ -58,7 +58,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
             </div>
           </div>
 
-          <div className="bg-slate-900 flex flex-col gap-2 rounded-lg p-4 w-2/4 ">
+          <div className="bg-slate-900 md:flex md:flex-col hidden  gap-2 rounded-lg p-4 w-2/4 ">
             <h1 className="text-sm">
               <span className="font-bold text-xl ">
                 Rs {pageDetails?.raisedAmount}{" "}

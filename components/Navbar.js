@@ -98,7 +98,7 @@ const Navbar = () => {
           </>
         ) : (
           <Link href={"/login"}>
-            <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-lg text-lg px-5 py-1 text-center me-2 mb-2">
+            <button className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:outline-none font-medium rounded-md text-lg px-5 py-1 text-center me-2 mb-2">
               Login
             </button>
           </Link>

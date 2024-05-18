@@ -4,11 +4,12 @@
 
 .glass{
   background: linear-gradient(135deg,rgba(255,255,255,0.09),rgba(255,255,255,0));
+  /* background: rgb(150, 14, 14); */
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 20px;
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 5px;
   border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+  box-shadow: 0 8px 32px 0 rgba(73, 73, 73, 0.192);
 }
 
 

@@ -26,7 +26,7 @@ const Discover = () => {
   }, []);
 
   return (
-    <div className=" flex  justify-center  items-center flex-wrap gap-2">
+    <>
       {pageDetails.length > 0 ? (
         pageDetails.map((item) => {
           return (
@@ -64,7 +64,7 @@ const Discover = () => {
       ) : (
         <p>No page to show</p>
       )}
-    </div>
+    </>
   );
 };
 

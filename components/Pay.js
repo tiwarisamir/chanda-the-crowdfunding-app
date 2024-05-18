@@ -56,8 +56,8 @@ const Pay = ({ pageDetails, recentDonation }) => {
             payment_method: "esewa",
             esewaSecret: "8gBm/:&EnhH.1/q",
             esewaProductCode: "EPAYTEST",
-            name: user?.username,
-            from_user: user?._id,
+            name: user?.username || "test user",
+            from_user: user?._id || "doisoiuser",
             to_page: pageDetails?._id,
           }),
           headers: {
@@ -86,7 +86,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
   };
 
   return (
-    <div className="flex   justify-center  my-5 gap-3 ">
+    <div className="flex   justify-center flex-wrap md:flex-nowrap  my-5 gap-3 ">
       <div className=" bg-slate-900 w-1/2 p-5 rounded-xl">
         <h2 className="text-xl font-semibold">Suppoters</h2>
         <ul className="mx-3">

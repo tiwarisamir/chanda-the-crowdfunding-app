@@ -80,6 +80,7 @@ const CreatorPage = ({ userDetails, pageDetails, recentDonation }) => {
             <Pay pageDetails={pageDetails} recentDonation={recentDonation} />
           </div>
         </div>
+
         <div className="flex justify-center items-center w-full">
           <Posts pageDetails={pageDetails} />
         </div>
