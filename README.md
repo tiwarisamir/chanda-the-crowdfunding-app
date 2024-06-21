@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Chanda
 
-## Getting Started
+Chanda is a fundraising web application designed for individuals, creators, and companies to raise funds from the public. The platform allows users to create fundraising campaigns, track donations, and manage fund distributions seamlessly. Its unique selling proposition is the integration with Nepali e-wallets, enabling easy payment processing. Built using Next.js, Mongoose, Next-Auth, Tailwind, and Edgestore, Chanda offers a modern and efficient solution for online fundraising.
 
-First, run the development server:
+### 🏠 [Visit Website](https://chanda-opal.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+[![MasterHead](/public/Chanda.JPG)](https://chanda-opal.vercel.app)
+
+## Installation
+
+Instructions on how to get the development environment running.
+
+```
+git clone https://github.com/tiwarisamir/chanda-the-crowdfunding-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Install dependencies
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Run as Dev
 
-## Learn More
+```
+ npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## .env example
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+GITHUB_ID=
+GITHUB_SECRET=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+GOOGLE_ID=
+GOOGLE_SECRET=
 
-## Deploy on Vercel
+EDGE_STORE_ACCESS_KEY=
+EDGE_STORE_SECRET_KEY=
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+MONGO_URI=
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+NEXTAUTH_URL=
+NEXTAUTH_SECRET=
+```
+
+## Tech Stacks
+
+- `React.jS`
+- `Next.js`
+- `edgestore`
+- `mongoose`
+- `Tailwindcss`
+- `Next-Auth`
+
+## Author
+
+🙎‍♂️ **Samir Tiwari @tiwarisamir**
+
+- Website: https://samirt.com.np
+- Twitter: [@samir11_tiwari](https://twitter.com/samir11_tiwari)
+
+- LinkedIn: [@samirtiwari2061](https://linkedin.com/in/samirtiwari2061)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome! <br />Feel free to check [issues page](https://github.com/tiwarisamir/chanda-the-crowdfunding-app/issues).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
