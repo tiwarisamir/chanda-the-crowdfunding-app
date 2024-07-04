@@ -81,12 +81,12 @@ const ContextProvider = ({ children }) => {
         // console.log(resData);
 
         signIn("credentials", {
-          email: resData.userdetail.email,
-          password: resData.userdetail.password,
+          email: resData?.userdetail?.email,
+          password: resData?.userdetail?.password,
           redirect: false,
         });
 
-        toast.success(data.message);
+        toast.success(data?.message);
 
         setrefresh(!refresh);
       }
