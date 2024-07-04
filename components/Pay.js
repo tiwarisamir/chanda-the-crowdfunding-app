@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const Pay = ({ pageDetails, recentDonation }) => {
   const { isAuth, logout, user } = useContext(Context);
-  const [selectedMethod, setSelectedMethod] = useState("esewa");
+  const [selectedMethod, setSelectedMethod] = useState("");
   const amount = useRef();
   const message = useRef();
 
@@ -25,7 +25,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
     if (
       amount.current?.value.length !== 0 &&
       message.current?.value.length !== 0 &&
-      selectedMethod !== 0
+      selectedMethod !== ""
     ) {
       const esewaCall = (formData) => {
         // console.log("form ko data in ecewa function: ", formData);
@@ -50,26 +50,26 @@ const Pay = ({ pageDetails, recentDonation }) => {
       try {
         const res = await fetch("/api/handlepay", {
           method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
           body: JSON.stringify({
             amount: amount.current?.value,
             message: message.current?.value,
-            payment_method: "esewa",
+            payment_method: selectedMethod,
             esewaSecret: "8gBm/:&EnhH.1/q",
             esewaProductCode: "EPAYTEST",
             name: user?.username || "test user",
             from_user: user?._id || "doisoiuser",
             to_page: pageDetails?._id,
           }),
-          headers: {
-            "content-type": "application/json",
-          },
         });
 
         if (res.ok) {
           const responseData = await res.json();
-          // console.log("yo res ho with data : ", responseData);
+          console.log("yo res ho with data : ", responseData);
 
-          esewaCall(responseData.formData);
+          // esewaCall(responseData.formData);
         } else {
           toast.error("Oops! Something is wrong.");
         }
@@ -159,7 +159,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
             </label>
 
             {/* Radio input for Khalti */}
-            {/* <label
+            <label
               className={`relative flex items-center justify-center w-20 h-20 p-2 rounded-lg bg-slate-800 cursor-pointer ${
                 selectedMethod === "khalti" ? "border border-blue-500" : ""
               }`}
@@ -176,9 +176,9 @@ const Pay = ({ pageDetails, recentDonation }) => {
                 alt="khalti"
                 className="w-24 object-cover"
               />
-            </label> */}
+            </label>
 
-            <div className="absolute text-sm bg-red-500 p-1 rounded-md right-0">
+            {/* <div className="absolute text-sm bg-red-500 p-1 rounded-md right-0">
               <span>For payment use this credentials</span>
               <ul>
                 <li>eSewa ID: 9806800001</li>
@@ -186,7 +186,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
                 <li>MPIN: 1122</li>
                 <li>Token:123456</li>
               </ul>
-            </div>
+            </div> */}
           </div>
           <button
             onClick={handelPay}
