@@ -91,8 +91,7 @@ const ContextProvider = ({ children }) => {
         setrefresh(!refresh);
       }
     } catch (err) {
-      throw new Error(err);
-      // console.log(err);
+      throw Error(err);
     }
   };
 
