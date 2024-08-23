@@ -94,12 +94,12 @@ export async function POST(req, res) {
         {
           method: "POST",
           headers: {
-            Authorization: `${process.env.KHALTI_SECRET_KEY}`,
+            Authorization: `key ${process.env.KHALTI_SECRET_KEY}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            return_url: `http://localhost:3000/c/${data.to_page}`,
-            website_url: "http://localhost:3000/",
+            return_url: `${process.env.NEXTAUTH_URL}/c/${data.to_page}`,
+            website_url: `${process.env.NEXTAUTH_URL}`,
             amount: data?.amount * 100,
             purchase_order_id: transaction_uuid,
             purchase_order_name: "fundraising",
@@ -107,7 +107,7 @@ export async function POST(req, res) {
         }
       );
 
-      console.log(res.body);
+      console.log("Payment with khalti:", res);
       if (res.status === 200) {
         return NextResponse.json("pay vayo");
       } else {
@@ -115,6 +115,7 @@ export async function POST(req, res) {
       }
     } catch (error) {
       console.log(error);
+      return NextResponse.json("Somthing went wrong");
     }
   }
 }
