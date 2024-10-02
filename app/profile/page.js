@@ -20,8 +20,8 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="flex gap-5   p-3">
-      <div className="w-1/4 flex flex-col gap-4  p-5 items-center overflow-hidden  glass">
+    <div className="flex flex-col md:flex-row gap-5   p-3">
+      <div className="w-full md:w-1/4 flex flex-col gap-4  p-5 items-center overflow-hidden  glass">
         <div className=" overflow-hidden flex justify-center  rounded-full  ">
           {user?.profilepic ? (
             <img
@@ -83,7 +83,7 @@ const Dashboard = () => {
           Edit Profile
         </Link>
       </div>
-      <div className="w-3/4 p-5 flex flex-col  glass">
+      <div className="w-full md:w-3/4 p-5 flex flex-col  glass">
         <div className="flex justify-between">
           <h1 className="text-2xl font-semibold">Pages</h1>
           <div className="relative">

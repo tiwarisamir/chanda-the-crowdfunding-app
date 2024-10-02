@@ -83,36 +83,6 @@ const Creator = () => {
                 />
               </div>
 
-              <div>
-                <div className="relative mb-2">
-                  <span className="text-lg cursor-pointer font-semibold border-b-2 border-white m-2 ">
-                    Esewa
-                  </span>
-                  <span className="text-lg font-semibold text-slate-500 ">
-                    Khalti
-                  </span>
-                  <div className="absolute z-10 right-5 top-0 text-red-500">
-                    <span>fill dummy data for now</span>
-                  </div>
-                </div>
-                <div className="relative w-full mb-3">
-                  <input
-                    ref={esewaProductCode}
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-700 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="esewa product code"
-                  />
-                </div>
-                <div className="relative w-full mb-3">
-                  <input
-                    ref={esewaSecret}
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-slate-700 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="esewa secret"
-                  />
-                </div>
-              </div>
-
               <div className="text-center flex gap-3 mt-3">
                 <button
                   type="submit"

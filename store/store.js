@@ -86,7 +86,7 @@ const ContextProvider = ({ children }) => {
           redirect: false,
         });
 
-        toast.success(data?.message);
+        toast.success("Registration Successfull!");
 
         setrefresh(!refresh);
       }

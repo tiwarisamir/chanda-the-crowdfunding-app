@@ -89,7 +89,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
 
   return (
     <div className="flex   justify-center flex-wrap md:flex-nowrap  my-5 gap-3 ">
-      <div className=" bg-slate-900 w-1/2 p-5 rounded-xl">
+      <div className=" bg-slate-900 w-full md:w-1/2 p-5 rounded-xl">
         <h2 className="text-xl font-semibold">Suppoters</h2>
         <ul className="mx-3">
           {recentDonation && recentDonation.length > 0 ? (
@@ -125,7 +125,7 @@ const Pay = ({ pageDetails, recentDonation }) => {
           )}
         </ul>
       </div>
-      <div className=" bg-slate-900 w-1/2 p-5 rounded-xl">
+      <div className=" bg-slate-900 w-full md:w-1/2 p-5 rounded-xl">
         <h2 className="text-xl font-semibold ">Make a Payment</h2>
         <form className="flex flex-col gap-5 my-3">
           <input

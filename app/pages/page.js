@@ -40,7 +40,7 @@ const pages = async ({ searchParams }) => {
 
   return (
     <div className="w-full  flex flex-col justify-center  py-5  items-center ">
-      <div className="flex h-[28rem] flex-wrap gap-5 w-3/5">
+      <div className="flex  flex-wrap gap-5 w-3/5">
         {allPages && allPages.length > 0 ? (
           allPages.map((item) => {
             return (

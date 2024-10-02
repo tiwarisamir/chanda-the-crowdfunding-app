@@ -100,15 +100,11 @@ const Posts = ({ pageDetails }) => {
     }
   };
 
-  // console.log("/******************************************* ");
-  // console.log("pageDetails in usestate data in postid: ", pageDetails);
-
   useEffect(() => {
     try {
       const fetchPost = async () => {
         setisLoading(true);
 
-        // console.log("yo post ma page id ho:", pageDetails?._id);
         const res = await fetch(`/api/getpost/id?id=${pageDetails?._id}`);
         const data = await res.json();
         if (data.success) {
@@ -120,13 +116,12 @@ const Posts = ({ pageDetails }) => {
       fetchPost();
     } catch (err) {
       throw new Error(err);
-      // console.log("error in posts component 2kxs", err);
     }
   }, [refresh]);
 
   return (
     <div className="flex w-full  justify-center items-center ">
-      <div className="flex  w-3/6  flex-col  gap-2 items-center">
+      <div className="flex  w-full px-5 md:px-0 md:w-3/6  flex-col  gap-2 items-center">
         <div className="w-full flex ">
           <h1 className=" text-2xl w-full  font-bold ">Recent posts </h1>
 

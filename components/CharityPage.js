@@ -35,7 +35,7 @@ const CharityPage = ({ userDetails, pageDetails, recentDonation }) => {
                 width={600}
                 height={300}
                 alt="fund raiser image"
-                className="w-full h-[25rem] object-cover rounded-lg "
+                className="w-full h-[15rem] md:h-[25rem] object-cover rounded-lg "
               />
             ) : (
               <div className="w-full h-[25rem] bg-slate-800 flex justify-center items-center">

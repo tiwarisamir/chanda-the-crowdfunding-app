@@ -25,27 +25,14 @@ const Profile = ({ params }) => {
         setuserDetails(data.organiser);
         setrecentDonation(data.recentDonation);
 
-        // console.log("response  in postid: ", response);
-        // console.log("response data in postid: ", data);
-        // console.log("/******************************************* ");
-        // console.log("pageDetails in usestate data in postid: ", pageDetails);
-
         setisLoading(false);
       };
 
       fetchProfile();
-      // console.log("yo session ho : ", userId);
     } catch (err) {
       throw new Error(err);
-      // console.log("Error :", err);
     }
   }, []);
-
-  // useEffect(() => {
-  //   if (!session && status !== "loading") {
-  //     router.push("/");
-  //   }
-  // }, [session, status, router]);
 
   if (isLoading) {
     return <p>Loading...</p>;

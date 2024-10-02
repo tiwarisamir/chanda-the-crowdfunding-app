@@ -13,7 +13,6 @@ export default function Home() {
         const res = await fetch(`/api/gethome`);
         const data = await res.json();
         if (data.success) {
-          // console.log("data aayo :", data);
           setpageDetails(data.pageDetails);
           setisLoading(false);
         }
@@ -22,14 +21,13 @@ export default function Home() {
       fetchProfile();
     } catch (err) {
       throw new Error(err);
-      // console.log("Error: ", err);
     }
   }, []);
 
   return (
     <div className="w-full">
-      <div className="flex justify-center items-center flex-col text-center  h-[90vh] p-5 w-3/4 mx-auto gap-10  ">
-        <h2 className="font-bold text-9xl">Chanda</h2>
+      <div className="flex justify-center items-center flex-col text-center   p-5 w-3/4 mx-auto gap-10  ">
+        <h2 className="font-bold text-5xl md:text-8xl">Chanda</h2>
 
         <p className="text-xl">
           A platform for crowdsourcing or fund-raising, designed to help
@@ -103,7 +101,9 @@ export default function Home() {
 
       <div className="min-h-screen   self-center flex justify-center items-center">
         <div className=" w-[80%]">
-          <h1 className=" text-5xl my-5 font-bold ">What can you do here?</h1>
+          <h1 className="text-3xl md:text-5xl my-5 font-bold ">
+            What can you do here?
+          </h1>
 
           <div>
             <h2 className="text-2xl font-semibold mb-3 border-b-2 py-1">
