@@ -21,7 +21,7 @@ const Posts = ({ pageDetails }) => {
     try {
       const fetchComment = async () => {
         setisLoading(true);
-        const res = await fetch(`/api/getcomment/id?id=${postId}`);
+        const res = await fetch(`/api/getcomment/${postId}`);
         const data = await res.json();
         if (data.success) {
           setcomments((prevState) => ({
@@ -105,7 +105,7 @@ const Posts = ({ pageDetails }) => {
       const fetchPost = async () => {
         setisLoading(true);
 
-        const res = await fetch(`/api/getpost/id?id=${pageDetails?._id}`);
+        const res = await fetch(`/api/getpost/${pageDetails?._id}`);
         const data = await res.json();
         if (data.success) {
           setposts(data.postDetails);

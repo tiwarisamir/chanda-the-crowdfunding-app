@@ -9,8 +9,6 @@ export async function POST(req, res) {
 
     const currentDonationPage = await donationPage.findById(data.pageId);
 
-    // console.log("yo current donation page details ho :", currentDonationPage);
-
     if (data.title.length !== 0) {
       currentDonationPage.title = data.title;
     }

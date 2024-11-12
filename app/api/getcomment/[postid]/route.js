@@ -7,11 +7,11 @@ import Payment from "@/models/Payment";
 import Post from "@/models/Post";
 import Comment from "@/models/Comment";
 
-export async function GET(req, res) {
+export async function GET(req, context) {
   try {
     await connectDB();
 
-    const id = await req.url.split("=")[1];
+    const id = context.params.postid;
 
     const commentDetail = await Comment.find({ post: id });
 
@@ -27,7 +27,6 @@ export async function GET(req, res) {
       message: "page not found",
     });
   } catch (err) {
-    // console.log("error aayo: ", err);
     return NextResponse.json({
       success: false,
       error: err,
